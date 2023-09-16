@@ -5,7 +5,7 @@ import (
 	"github.com/dal-go/dalgo/dal"
 	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-go-core/modules/teamus/dal4teamus"
-	"github.com/sneat-co/sneat-go-modules/listus"
+	"github.com/sneat-co/sneat-go-modules/listus/const4listus"
 	"github.com/sneat-co/sneat-go-modules/listus/dal4listus"
 	"github.com/sneat-co/sneat-go-modules/listus/models4listus"
 	"github.com/strongo/validation"
@@ -27,6 +27,6 @@ func DeleteList(ctx context.Context, user facade.User, request ListRequest) (err
 		TeamItem:      dal.NewRecord(key),
 		BriefsAdapter: briefsAdapter(request.ListType, request.ListID),
 	}
-	err = dal4teamus.DeleteTeamItem(ctx, user, input, listus.ModuleID, nil)
+	err = dal4teamus.DeleteTeamItem(ctx, user, input, const4listus.ModuleID, nil)
 	return
 }

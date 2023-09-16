@@ -6,8 +6,8 @@ import (
 	"net/http"
 )
 
-// RegisterScrumRoutes registers scrum routes
-func RegisterScrumRoutes(handle modules.HTTPHandleFunc) {
+// RegisterHttpRoutes registers scrum routes
+func RegisterHttpRoutes(handle modules.HTTPHandleFunc) {
 	handle(http.MethodGet, "/v0/scrum", httpGetScrum)
 	handle(http.MethodPost, "/v0/scrum/add_task", httpPostAddTask)
 	handle(http.MethodPost, "/v0/scrum/set_metric", httpPostSetMetric)

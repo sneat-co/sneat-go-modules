@@ -8,7 +8,7 @@ import (
 	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-go-core/modules/teamus/dal4teamus"
 	"github.com/sneat-co/sneat-go-core/modules/teamus/facade4teamus"
-	"github.com/sneat-co/sneat-go-modules/listus"
+	"github.com/sneat-co/sneat-go-modules/listus/const4listus"
 	"github.com/sneat-co/sneat-go-modules/listus/dal4listus"
 	"github.com/sneat-co/sneat-go-modules/listus/models4listus"
 	"github.com/strongo/random"
@@ -23,7 +23,7 @@ func CreateListItems(ctx context.Context, userContext facade.User, request Creat
 	}
 	uid := userContext.GetID()
 
-	err = dal4teamus.RunModuleTeamWorker(ctx, userContext, request.TeamRequest, listus.ModuleID,
+	err = dal4teamus.RunModuleTeamWorker(ctx, userContext, request.TeamRequest, const4listus.ModuleID,
 		func(ctx context.Context, tx dal.ReadwriteTransaction, params *dal4teamus.ModuleTeamWorkerParams[*models4listus.ListusTeamDto]) error {
 			listID := models4listus.GetFullListID(request.ListType, request.ListID)
 			listKey := dal4listus.NewTeamListKey(request.TeamID, listID)

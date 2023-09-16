@@ -5,8 +5,8 @@ import (
 	"net/http"
 )
 
-// RegisterListusRoutes registers listus routes
-func RegisterListusRoutes(handle modules.HTTPHandleFunc) {
+// RegisterHttpRoutes registers listus routes
+func RegisterHttpRoutes(handle modules.HTTPHandleFunc) {
 	handle(http.MethodPost, "/v0/listus/create_list", httpPostCreateList)
 	handle(http.MethodDelete, "/v0/listus/delete_list", httpDeleteList)
 	handle(http.MethodPost, "/v0/listus/list_items_create", httpPostCreateListItems)

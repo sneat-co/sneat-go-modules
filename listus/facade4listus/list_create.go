@@ -8,7 +8,7 @@ import (
 	"github.com/sneat-co/sneat-go-core/facade"
 	dbmodels2 "github.com/sneat-co/sneat-go-core/models/dbmodels"
 	"github.com/sneat-co/sneat-go-core/modules/teamus/dal4teamus"
-	"github.com/sneat-co/sneat-go-modules/listus"
+	"github.com/sneat-co/sneat-go-modules/listus/const4listus"
 	"github.com/sneat-co/sneat-go-modules/listus/dal4listus"
 	"github.com/sneat-co/sneat-go-modules/listus/models4listus"
 	"github.com/strongo/random"
@@ -22,7 +22,7 @@ func CreateList(ctx context.Context, user facade.User, request CreateListRequest
 	if err = request.Validate(); err != nil {
 		return
 	}
-	err = dal4teamus.CreateTeamItem(ctx, user, "", request.TeamRequest, listus.ModuleID,
+	err = dal4teamus.CreateTeamItem(ctx, user, "", request.TeamRequest, const4listus.ModuleID,
 		func(ctx context.Context, tx dal.ReadwriteTransaction, params *dal4teamus.ModuleTeamWorkerParams[*models4listus.ListusTeamDto]) (err error) {
 			var listGroup *models4listus.ListGroup
 			for _, lg := range params.TeamModuleEntry.Data.ListGroups {

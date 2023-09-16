@@ -1,7 +1,7 @@
 package models4brands
 
 import (
-	"github.com/sneat-co/sneat-go-modules/assetus/const4assets"
+	"github.com/sneat-co/sneat-go-modules/assetus/const4assetus"
 	"strings"
 	"testing"
 )
@@ -9,7 +9,7 @@ import (
 func TestBrand_Validate(t *testing.T) {
 	type fields struct {
 		Title      string
-		AssetTypes []const4assets.AssetCategory
+		AssetTypes []const4assetus.AssetCategory
 		WebsiteURL string
 		Models     []string
 	}

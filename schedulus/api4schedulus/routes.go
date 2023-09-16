@@ -5,8 +5,8 @@ import (
 	"net/http"
 )
 
-// RegisterSchedulusRoutes register schedule routes
-func RegisterSchedulusRoutes(handle modules.HTTPHandleFunc) {
+// RegisterHttpRoutes register schedule routes
+func RegisterHttpRoutes(handle modules.HTTPHandleFunc) {
 	handle(http.MethodPost, "/v0/happenings/create_happening", httpPostCreateHappening)
 	handle(http.MethodDelete, "/v0/happenings/delete_happening", httpDeleteHappening)
 	handle(http.MethodDelete, "/v0/happenings/delete_slots", httpDeleteSlots)

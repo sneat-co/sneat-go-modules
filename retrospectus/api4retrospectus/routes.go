@@ -6,8 +6,8 @@ import (
 	"net/http"
 )
 
-// RegisterRetrospectiveRoutes registers retrospective routes
-func RegisterRetrospectiveRoutes(handle modules.HTTPHandleFunc) {
+// RegisterHttpRoutes registers retrospective routes
+func RegisterHttpRoutes(handle modules.HTTPHandleFunc) {
 	handle(http.MethodPost, "/v0/retrospective/toggle_meeting_timer", api4meetingus.ToggleMeetingTimer(meetingParams))
 	handle(http.MethodPost, "/v0/retrospective/toggle_member_timer", api4meetingus.ToggleMemberTimer(meetingParams))
 
