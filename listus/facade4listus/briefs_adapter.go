@@ -1,7 +1,7 @@
 package facade4listus
 
 import (
-	"github.com/sneat-co/sneat-go-core/modules/teamus/dal4teamus"
+	"github.com/sneat-co/sneat-core-modules/teamus/dal4teamus"
 	"github.com/sneat-co/sneat-go-modules/listus/models4listus"
 )
 

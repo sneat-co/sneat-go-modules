@@ -3,17 +3,17 @@ package facade4retrospectus
 import (
 	"context"
 	"github.com/dal-go/dalgo/dal"
+	"github.com/sneat-co/sneat-core-modules/teamus/dal4teamus"
+	"github.com/sneat-co/sneat-core-modules/teamus/dto4teamus"
 	"github.com/sneat-co/sneat-go-core/facade"
-	"github.com/sneat-co/sneat-go-core/modules/teamus/dal4teamus"
-	"github.com/sneat-co/sneat-go-core/modules/teamus/dto4teamus"
-	"github.com/sneat-co/sneat-go-core/tests"
 	"github.com/sneat-co/sneat-go-modules/meetingus/facade4meetingus"
+	testdb "github.com/sneat-co/sneat-go-testdb"
 	"testing"
 )
 
 func TestAddRetroItem(t *testing.T) {
 
-	_ = tests.NewMockDB(t, tests.WithProfile1())
+	_ = testdb.NewMockDB(t, testdb.WithProfile1())
 
 	userContext := facade.NewUser("user1")
 	t.Run("should_succeed", func(t *testing.T) {

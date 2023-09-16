@@ -5,7 +5,7 @@ import (
 	"github.com/sneat-co/sneat-go-core/apicore/httpmock"
 	"github.com/sneat-co/sneat-go-core/apicore/verify"
 	"github.com/sneat-co/sneat-go-core/facade"
-	"github.com/sneat-co/sneat-go-core/modules/teamus/dto4teamus"
+	"github.com/sneat-co/sneat-core-modules/teamus/dto4teamus"
 	"github.com/sneat-co/sneat-go-modules/meetingus/facade4meetingus"
 	"github.com/sneat-co/sneat-go-modules/retrospectus/facade4retrospectus"
 	"net/http"

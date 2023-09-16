@@ -3,7 +3,7 @@ package models4scrumus
 import (
 	"fmt"
 	"github.com/sneat-co/sneat-go-core/models/dbmodels"
-	"github.com/sneat-co/sneat-go-core/modules/teamus/models4teamus"
+	"github.com/sneat-co/sneat-core-modules/teamus/models4teamus"
 	"github.com/sneat-co/sneat-go-modules/meetingus/models4meetingus"
 	"github.com/strongo/validation"
 	"strings"

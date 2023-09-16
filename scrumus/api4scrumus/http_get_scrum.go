@@ -3,7 +3,7 @@ package api4scrumus
 import (
 	"github.com/sneat-co/sneat-go-core/apicore"
 	"github.com/sneat-co/sneat-go-core/facade"
-	"github.com/sneat-co/sneat-go-core/sneatfb"
+	"github.com/sneat-co/sneat-go-firebase/sneatfb"
 	"github.com/sneat-co/sneat-go-modules/scrumus/facade4scrumus"
 	"net/http"
 )

@@ -1,7 +1,7 @@
 package facade4scrumus
 
 import (
-	"github.com/sneat-co/sneat-go-core/modules/teamus/dto4teamus"
+	"github.com/sneat-co/sneat-core-modules/teamus/dto4teamus"
 	"github.com/sneat-co/sneat-go-modules/meetingus/facade4meetingus"
 	"github.com/strongo/validation"
 	"testing"

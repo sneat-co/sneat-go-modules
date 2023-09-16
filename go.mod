@@ -9,7 +9,9 @@ require (
 	github.com/dal-go/dalgo v0.10.2
 	github.com/datatug/datatug v0.4.9
 	github.com/olebedev/when v1.0.0
-	github.com/sneat-co/sneat-go-core v0.3.0
+	github.com/sneat-co/sneat-core-modules v0.0.1
+	github.com/sneat-co/sneat-go-core v0.5.0
+	github.com/sneat-co/sneat-go-firebase v0.0.1
 	github.com/stretchr/testify v1.8.4
 	github.com/strongo/random v0.0.1
 	github.com/strongo/slice v0.1.4
@@ -29,7 +31,7 @@ require (
 	github.com/alexsergivan/transliterator v1.0.0 // indirect
 	github.com/bots-go-framework/bots-go-core v0.0.1 // indirect
 	github.com/crediterra/money v0.2.0 // indirect
-	github.com/dal-go/dalgo2buntdb v0.7.15 // indirect
+	github.com/dal-go/dalgo2buntdb v0.7.17 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/golang-jwt/jwt/v4 v4.5.0 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
@@ -49,6 +51,7 @@ require (
 	github.com/pquerna/ffjson v0.0.0-20190930134022-aa0246cd15f7 // indirect
 	github.com/qri-io/jsonpointer v0.1.1 // indirect
 	github.com/qri-io/jsonschema v0.2.1 // indirect
+	github.com/sneat-co/sneat-go-testdb v0.0.1 // indirect
 	github.com/strongo/app v0.5.7 // indirect
 	github.com/strongo/decimal v0.0.1 // indirect
 	github.com/strongo/gamp v0.0.1 // indirect

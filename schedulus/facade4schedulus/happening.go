@@ -6,7 +6,7 @@ import (
 	"github.com/dal-go/dalgo/dal"
 	"github.com/dal-go/dalgo/record"
 	"github.com/sneat-co/sneat-go-core/facade"
-	"github.com/sneat-co/sneat-go-core/modules/contactus/dal4contactus"
+	"github.com/sneat-co/sneat-core-modules/contactus/dal4contactus"
 	"github.com/sneat-co/sneat-go-modules/schedulus/dal4schedulus"
 	"github.com/sneat-co/sneat-go-modules/schedulus/dto4schedulus"
 	"github.com/sneat-co/sneat-go-modules/schedulus/models4schedulus"

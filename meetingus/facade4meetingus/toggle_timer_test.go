@@ -2,12 +2,12 @@ package facade4meetingus
 
 import (
 	"context"
+	"github.com/sneat-co/sneat-core-modules/teamus/dto4teamus"
+	"github.com/sneat-co/sneat-core-modules/teamus/models4teamus"
 	"github.com/sneat-co/sneat-go-core/facade"
 	dbmodels2 "github.com/sneat-co/sneat-go-core/models/dbmodels"
-	"github.com/sneat-co/sneat-go-core/modules/teamus/dto4teamus"
-	"github.com/sneat-co/sneat-go-core/modules/teamus/models4teamus"
-	"github.com/sneat-co/sneat-go-core/tests"
 	"github.com/sneat-co/sneat-go-modules/meetingus/models4meetingus"
+	testdb "github.com/sneat-co/sneat-go-testdb"
 	"testing"
 	"time"
 )
@@ -26,7 +26,7 @@ func (recordFactory) NewRecordData() models4meetingus.MeetingInstance {
 }
 
 func TestToggleTimer(t *testing.T) { // TODO(help-wanted): add more test cases
-	_ = tests.NewMockDB(t, tests.WithProfile1())
+	_ = testdb.NewMockDB(t, testdb.WithProfile1())
 
 	userContext := facade.NewUser("user1")
 

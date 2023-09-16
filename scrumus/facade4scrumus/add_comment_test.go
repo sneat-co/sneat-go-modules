@@ -4,10 +4,10 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/dal-go/dalgo/dal"
+	"github.com/sneat-co/sneat-core-modules/teamus/dto4teamus"
 	"github.com/sneat-co/sneat-go-core/facade"
-	"github.com/sneat-co/sneat-go-core/modules/teamus/dto4teamus"
-	"github.com/sneat-co/sneat-go-core/tests"
 	"github.com/sneat-co/sneat-go-modules/meetingus/facade4meetingus"
+	testdb "github.com/sneat-co/sneat-go-testdb"
 	"strings"
 	"testing"
 )
@@ -40,7 +40,7 @@ func TestAddCommentRequest_Validate(t *testing.T) {
 func TestAddComment(t *testing.T) {
 	//userContext := facade4meetingus.NewUser("user1")
 
-	db := tests.NewMockDB(t, tests.WithProfile1())
+	db := testdb.NewMockDB(t, testdb.WithProfile1())
 
 	facade.GetDatabase = func(ctx context.Context) dal.DB {
 		return db

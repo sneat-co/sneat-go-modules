@@ -4,7 +4,7 @@ import (
 	"github.com/datatug/datatug/packages/server/endpoints"
 	"github.com/sneat-co/sneat-go-core/apicore"
 	"github.com/sneat-co/sneat-go-core/httpserver"
-	"github.com/sneat-co/sneat-go-core/modules/teamus/dto4teamus"
+	"github.com/sneat-co/sneat-core-modules/teamus/dto4teamus"
 	"github.com/sneat-co/sneat-go-modules/meetingus/facade4meetingus"
 	"github.com/sneat-co/sneat-go-modules/scrumus/facade4scrumus"
 	"net/http"

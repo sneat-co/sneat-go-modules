@@ -2,7 +2,7 @@ package models4assetus
 
 import (
 	dbmodels2 "github.com/sneat-co/sneat-go-core/models/dbmodels"
-	"github.com/sneat-co/sneat-go-core/modules/contactus/briefs4contactus"
+	"github.com/sneat-co/sneat-core-modules/contactus/briefs4contactus"
 	"github.com/sneat-co/sneat-go-core/validate"
 	"github.com/sneat-co/sneat-go-modules/assetus/briefs4assetus"
 )

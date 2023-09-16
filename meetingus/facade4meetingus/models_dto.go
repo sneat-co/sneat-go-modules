@@ -2,7 +2,7 @@ package facade4meetingus
 
 import (
 	"github.com/sneat-co/sneat-go-core/facade"
-	"github.com/sneat-co/sneat-go-core/modules/teamus/dto4teamus"
+	"github.com/sneat-co/sneat-core-modules/teamus/dto4teamus"
 	"github.com/sneat-co/sneat-go-modules/meetingus/models4meetingus"
 	"github.com/strongo/validation"
 	"strings"

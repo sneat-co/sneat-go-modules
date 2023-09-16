@@ -7,7 +7,7 @@ import (
 	"github.com/dal-go/dalgo/dal"
 	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-go-core/models/dbmodels"
-	"github.com/sneat-co/sneat-go-core/modules/teamus/dal4teamus"
+	"github.com/sneat-co/sneat-core-modules/teamus/dal4teamus"
 	"github.com/sneat-co/sneat-go-modules/schedulus/const4schedulus"
 	"github.com/sneat-co/sneat-go-modules/schedulus/dto4schedulus"
 	"github.com/sneat-co/sneat-go-modules/schedulus/models4schedulus"
