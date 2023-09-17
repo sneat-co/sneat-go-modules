@@ -3,7 +3,6 @@ module github.com/sneat-co/sneat-go-modules
 go 1.21.0
 
 require (
-	cloud.google.com/go/firestore v1.12.0
 	github.com/bots-go-framework/bots-fw v0.21.4
 	github.com/bots-go-framework/bots-fw-store v0.1.0
 	github.com/dal-go/dalgo v0.10.2
@@ -23,6 +22,7 @@ require (
 	cloud.google.com/go v0.110.2 // indirect
 	cloud.google.com/go/compute v1.19.3 // indirect
 	cloud.google.com/go/compute/metadata v0.2.3 // indirect
+	cloud.google.com/go/firestore v1.12.0 // indirect
 	cloud.google.com/go/iam v0.13.0 // indirect
 	cloud.google.com/go/longrunning v0.5.0 // indirect
 	cloud.google.com/go/storage v1.30.1 // indirect

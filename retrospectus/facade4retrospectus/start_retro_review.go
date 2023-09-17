@@ -1,12 +1,11 @@
 package facade4retrospectus
 
 import (
-	"cloud.google.com/go/firestore"
 	"context"
 	"fmt"
 	"github.com/dal-go/dalgo/dal"
-	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-core-modules/memberus/briefs4memberus"
+	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-go-modules/meetingus/facade4meetingus"
 	"github.com/sneat-co/sneat-go-modules/retrospectus/models4retrospectus"
 	"github.com/strongo/validation"
@@ -97,15 +96,15 @@ func moveRetroItemsFromUsers(ctx context.Context, tx dal.ReadwriteTransaction, p
 			retroItems = append(retroItems, retroItem)
 		}
 		if err = txUpdate(ctx, tx, userRetroRecords[i].Key(), []dal.Update{
-			{Field: "items", Value: firestore.Delete},
-			{Field: "countsByMemberAndType", Value: firestore.Delete},
+			{Field: "items", Value: dal.DeleteField},
+			{Field: "countsByMemberAndType", Value: dal.DeleteField},
 		}); err != nil {
 			return
 		}
 	}
 	if len(retroItems) > 0 {
 		teamRetrosUpdates = []dal.Update{
-			{Field: "items", Value: firestore.ArrayUnion(retroItems...)},
+			{Field: "items", Value: dal.ArrayUnion(retroItems...)},
 		}
 	}
 	return

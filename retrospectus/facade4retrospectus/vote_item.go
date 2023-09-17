@@ -1,7 +1,6 @@
 package facade4retrospectus
 
 import (
-	"cloud.google.com/go/firestore"
 	"context"
 	"fmt"
 	"github.com/dal-go/dalgo/dal"
@@ -51,7 +50,7 @@ func VoteItem(ctx context.Context, userContext facade.User, request VoteItemRequ
 				Field: fmt.Sprintf("%v.votesByUser.%v", itemNode.GetUpdatePath(nodesByID), uid),
 			}}
 			if request.Points == 0 {
-				updates[0].Value = firestore.Delete
+				updates[0].Value = dal.DeleteField
 			} else {
 				updates[0].Value = request.Points
 			}

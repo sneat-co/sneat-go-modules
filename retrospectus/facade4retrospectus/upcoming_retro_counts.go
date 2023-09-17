@@ -30,7 +30,7 @@ package facade4retrospectus
 //	if len(itemsByType) == 0 {
 //		upcomingRetro := team.Data.UpcomingRetro
 //		if upcomingRetro != nil && upcomingRetro.ItemsByUserAndType != nil {
-//			teamUpdates = append(teamUpdates, dal.Update{Field: path, Value: firestore.Delete})
+//			teamUpdates = append(teamUpdates, dal.Update{Field: path, Value: dal.DeleteField})
 //			delete(upcomingRetro.ItemsByUserAndType, uid)
 //		}
 //	} else {
@@ -49,7 +49,7 @@ package facade4retrospectus
 //			if existingCounts, teamHasUserCounts := team.Data.UpcomingRetro.ItemsByUserAndType[uid]; teamHasUserCounts {
 //				for itemType := range existingCounts {
 //					if _, exist := currentUserCounts[itemType]; !exist {
-//						teamUpdates = append(teamUpdates, dal.Update{Field: fmt.Sprintf("%v.%v", path, itemType), Value: firestore.Delete})
+//						teamUpdates = append(teamUpdates, dal.Update{Field: fmt.Sprintf("%v.%v", path, itemType), Value: dal.DeleteField})
 //					}
 //				}
 //			}

@@ -1,7 +1,6 @@
 package facade4scrumus
 
 import (
-	"cloud.google.com/go/firestore"
 	"context"
 	"fmt"
 	"github.com/dal-go/dalgo/dal"
@@ -32,7 +31,7 @@ func DeleteTask(ctx context.Context, userContext facade.User, request DeleteTask
 			}
 			var updateValue interface{}
 			if len(tasks) == 0 {
-				updateValue = firestore.Delete
+				updateValue = dal.DeleteField
 			} else {
 				if err = models4scrumus.ValidateTasks(tasks); err != nil {
 					return err

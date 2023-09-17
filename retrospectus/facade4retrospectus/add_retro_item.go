@@ -1,13 +1,12 @@
 package facade4retrospectus
 
 import (
-	"cloud.google.com/go/firestore"
 	"context"
 	"fmt"
 	"github.com/dal-go/dalgo/dal"
-	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-core-modules/userus/facade4userus"
 	models4userus2 "github.com/sneat-co/sneat-core-modules/userus/models4userus"
+	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-go-core/validate"
 	"github.com/sneat-co/sneat-go-modules/meetingus/facade4meetingus"
 	"github.com/sneat-co/sneat-go-modules/retrospectus/models4retrospectus"
@@ -142,7 +141,7 @@ func addRetroItemToUserRetro(ctx context.Context, userContext facade.User, reque
 		updates := []dal.Update{
 			{
 				Field: fmt.Sprintf("api4meetingus.%v.retroItems.%v", request.TeamID, request.Type),
-				Value: firestore.ArrayUnion(item),
+				Value: dal.ArrayUnion(item),
 			},
 		}
 		if err = facade4userus.TxUpdateUser(ctx, transaction, started, userKey, updates); err != nil {
@@ -228,7 +227,7 @@ func addRetroItemToTeamRetro(ctx context.Context, userContext facade.User, reque
 				},
 				{
 					Field: "items",
-					Value: firestore.ArrayUnion(item),
+					Value: dal.ArrayUnion(item),
 				},
 				{
 					Field: fmt.Sprintf("countsByMemberAndType.%v.%v", uid, request.Type),

@@ -1,13 +1,12 @@
 package facade4retrospectus
 
 import (
-	"cloud.google.com/go/firestore"
 	"context"
 	"fmt"
 	"github.com/dal-go/dalgo/dal"
-	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-core-modules/teamus/dal4teamus"
 	models4userus2 "github.com/sneat-co/sneat-core-modules/userus/models4userus"
+	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-go-modules/retrospectus/dal4retrospectus"
 	"github.com/sneat-co/sneat-go-modules/retrospectus/models4retrospectus"
 	"time"
@@ -41,10 +40,10 @@ func FixCounts(ctx context.Context, userContext facade.User, request FixCountsRe
 				delete(retroTeam.Data.UpcomingRetro.ItemsByUserAndType, uid)
 				if len(retroTeam.Data.UpcomingRetro.ItemsByUserAndType) == 0 {
 					retroTeam.Data.UpcomingRetro = nil
-					updates = append(updates, dal.Update{Field: "upcomingRetro", Value: firestore.Delete})
+					updates = append(updates, dal.Update{Field: "upcomingRetro", Value: dal.DeleteField})
 				} else {
 					path := fmt.Sprintf("upcomingRetro.itemsByUserAndType.%v", uid)
-					updates = append(updates, dal.Update{Field: path, Value: firestore.Delete})
+					updates = append(updates, dal.Update{Field: path, Value: dal.DeleteField})
 				}
 			}
 		} else {
@@ -54,7 +53,7 @@ func FixCounts(ctx context.Context, userContext facade.User, request FixCountsRe
 			//		path := fmt.Sprintf("upcomingRetro.itemsByUserAndType.%v.%v", uid, itemType)
 			//		if count == 0 {
 			//			delete(team.Data.UpcomingRetro.ItemsByUserAndType[uid], itemType)
-			//			updates = append(updates, dal.Update{Field: path, Value: firestore.Delete})
+			//			updates = append(updates, dal.Update{Field: path, Value: dal.DeleteField})
 			//		} else {
 			//			team.Data.UpcomingRetro.ItemsByUserAndType[uid][itemType] = count
 			//			updates = append(updates, dal.Update{Field: path, Value: count})
@@ -63,7 +62,7 @@ func FixCounts(ctx context.Context, userContext facade.User, request FixCountsRe
 			//}
 			if len(retroTeam.Data.UpcomingRetro.ItemsByUserAndType[uid]) == 0 {
 				delete(retroTeam.Data.UpcomingRetro.ItemsByUserAndType, uid)
-				updates = []dal.Update{{Field: "upcomingRetro", Value: firestore.Delete}}
+				updates = []dal.Update{{Field: "upcomingRetro", Value: dal.DeleteField}}
 			}
 		}
 		if len(updates) > 0 {
