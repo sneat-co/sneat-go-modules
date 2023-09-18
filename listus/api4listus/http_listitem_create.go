@@ -1,8 +1,8 @@
 package api4listus
 
 import (
-	"github.com/datatug/datatug/packages/server/endpoints"
 	"github.com/sneat-co/sneat-go-core/apicore"
+	"github.com/sneat-co/sneat-go-core/apicore/verify"
 	"github.com/sneat-co/sneat-go-modules/listus/facade4listus"
 	"net/http"
 )
@@ -12,11 +12,7 @@ var createListItems = facade4listus.CreateListItems
 // httpPostCreateListItems creates list items
 func httpPostCreateListItems(w http.ResponseWriter, r *http.Request) {
 	var request facade4listus.CreateListItemsRequest
-	ctx, userContext, err := apicore.VerifyAuthenticatedRequestAndDecodeBody(w, r, endpoints.VerifyRequest{
-		MinContentLength: apicore.MinJSONRequestSize,
-		MaxContentLength: apicore.DefaultMaxJSONRequestSize,
-		AuthRequired:     true,
-	}, &request)
+	ctx, userContext, err := apicore.VerifyAuthenticatedRequestAndDecodeBody(w, r, verify.DefaultJsonWithAuthRequired, &request)
 	if err != nil {
 		return
 	}

@@ -1,8 +1,8 @@
 package api4retrospectus
 
 import (
-	"github.com/datatug/datatug/packages/server/endpoints"
 	"github.com/sneat-co/sneat-go-core/apicore"
+	"github.com/sneat-co/sneat-go-core/apicore/verify"
 	"github.com/sneat-co/sneat-go-modules/retrospectus/facade4retrospectus"
 	"net/http"
 )
@@ -11,11 +11,7 @@ var startRetroReview = facade4retrospectus.StartRetroReview
 
 // httpPostStartRetroReview is an API endpoint that starts retrospective
 func httpPostStartRetroReview(w http.ResponseWriter, r *http.Request) {
-	ctx, userContext, err := verifyRequest(w, r, endpoints.VerifyRequest{
-		MinContentLength: apicore.MinJSONRequestSize,
-		MaxContentLength: 10 * apicore.KB,
-		AuthRequired:     true,
-	})
+	ctx, userContext, err := verifyRequest(w, r, verify.DefaultJsonWithAuthRequired)
 	if err != nil {
 		return
 	}

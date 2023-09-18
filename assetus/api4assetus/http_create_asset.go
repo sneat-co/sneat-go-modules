@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/datatug/datatug/packages/server/endpoints"
 	"github.com/sneat-co/sneat-go-core/apicore"
+	"github.com/sneat-co/sneat-go-core/apicore/verify"
 	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-go-modules/assetus/const4assetus"
 	"github.com/sneat-co/sneat-go-modules/assetus/facade4assetus"
@@ -55,11 +55,5 @@ func httpPostCreateAsset(w http.ResponseWriter, r *http.Request) {
 		}
 		return asset, nil
 	}
-	apicore.HandleAuthenticatedRequestWithBody(w, r, &request, handler, http.StatusCreated,
-		endpoints.VerifyRequest{
-			MinContentLength: apicore.MinJSONRequestSize,
-			MaxContentLength: 10 * apicore.KB,
-			AuthRequired:     true,
-		},
-	)
+	apicore.HandleAuthenticatedRequestWithBody(w, r, &request, handler, http.StatusCreated, verify.DefaultJsonWithAuthRequired)
 }

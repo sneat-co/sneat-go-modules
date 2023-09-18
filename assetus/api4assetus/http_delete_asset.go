@@ -3,10 +3,10 @@ package api4assetus
 import (
 	"context"
 	"fmt"
-	"github.com/datatug/datatug/packages/server/endpoints"
-	"github.com/sneat-co/sneat-go-core/apicore"
-	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-core-modules/teamus/dal4teamus"
+	"github.com/sneat-co/sneat-go-core/apicore"
+	"github.com/sneat-co/sneat-go-core/apicore/verify"
+	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-go-modules/assetus/facade4assetus"
 	"net/http"
 )
@@ -25,11 +25,5 @@ func httpDeleteAsset(w http.ResponseWriter, r *http.Request) {
 		}
 		return nil, nil
 	}
-	apicore.HandleAuthenticatedRequestWithBody(w, r, &request, handler, http.StatusNoContent,
-		endpoints.VerifyRequest{
-			MinContentLength: 0,
-			MaxContentLength: 0,
-			AuthRequired:     true,
-		},
-	)
+	apicore.HandleAuthenticatedRequestWithBody(w, r, &request, handler, http.StatusNoContent, verify.NoContentAuthRequired)
 }

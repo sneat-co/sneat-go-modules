@@ -1,10 +1,10 @@
 package api4scrumus
 
 import (
-	"github.com/datatug/datatug/packages/server/endpoints"
-	"github.com/sneat-co/sneat-go-core/apicore"
-	"github.com/sneat-co/sneat-go-core/httpserver"
 	"github.com/sneat-co/sneat-core-modules/teamus/dto4teamus"
+	"github.com/sneat-co/sneat-go-core/apicore"
+	"github.com/sneat-co/sneat-go-core/apicore/verify"
+	"github.com/sneat-co/sneat-go-core/httpserver"
 	"github.com/sneat-co/sneat-go-modules/meetingus/facade4meetingus"
 	"github.com/sneat-co/sneat-go-modules/scrumus/facade4scrumus"
 	"net/http"
@@ -14,7 +14,7 @@ var deleteTask = facade4scrumus.DeleteTask
 
 // httpDeleteTask is an API endpoint that delete a task
 func httpDeleteTask(w http.ResponseWriter, r *http.Request) {
-	ctx, userContext, err := apicore.VerifyRequestAndCreateUserContext(w, r, endpoints.VerifyRequest{AuthRequired: true})
+	ctx, userContext, err := apicore.VerifyRequestAndCreateUserContext(w, r, verify.DefaultJsonWithAuthRequired)
 	if err != nil {
 		httpserver.HandleError(err, "httpDeleteTask", w, r)
 		return

@@ -1,8 +1,8 @@
 package api4sportus
 
 import (
-	"github.com/datatug/datatug/packages/server/endpoints"
 	"github.com/sneat-co/sneat-go-core/apicore"
+	"github.com/sneat-co/sneat-go-core/apicore/verify"
 	"github.com/sneat-co/sneat-go-core/httpserver"
 	"github.com/sneat-co/sneat-go-core/modules"
 	"github.com/sneat-co/sneat-go-modules/sportus/facade4sportus"
@@ -23,11 +23,7 @@ func registerQuiverHandlers(handle modules.HTTPHandleFunc) {
 }
 
 func createWantedItem(w http.ResponseWriter, r *http.Request) {
-	ctx, userContext, err := apicore.VerifyRequestAndCreateUserContext(w, r, endpoints.VerifyRequest{
-		MinContentLength: apicore.MinJSONRequestSize,
-		MaxContentLength: apicore.KB * 100,
-		AuthRequired:     false,
-	})
+	ctx, userContext, err := apicore.VerifyRequestAndCreateUserContext(w, r, verify.DefaultJsonWithAuthRequired)
 	if err != nil {
 		return
 	}
@@ -52,11 +48,7 @@ func updateWantedItem(w http.ResponseWriter, _ *http.Request) {
 }
 
 func deleteWantedItem(w http.ResponseWriter, r *http.Request) {
-	ctx, userContext, err := apicore.VerifyRequestAndCreateUserContext(w, r, endpoints.VerifyRequest{
-		MinContentLength: apicore.MinJSONRequestSize,
-		MaxContentLength: apicore.KB * 100,
-		AuthRequired:     false,
-	})
+	ctx, userContext, err := apicore.VerifyRequestAndCreateUserContext(w, r, verify.DefaultJsonWithAuthRequired)
 	if err != nil {
 		return
 	}

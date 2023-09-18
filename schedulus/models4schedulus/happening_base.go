@@ -2,7 +2,6 @@ package models4schedulus
 
 import (
 	"fmt"
-	"github.com/datatug/datatug/packages/models"
 	"github.com/sneat-co/sneat-go-core/models/dbmodels"
 	"github.com/strongo/validation"
 )
@@ -50,7 +49,7 @@ func (v HappeningBase) Validate() error {
 		return validation.NewErrBadRecordFieldValue("canceled", "should be populated only for canceled happenings, current status="+v.Status)
 	}
 
-	if err := models.ValidateTitle(v.Title); err != nil {
+	if err := dbmodels.ValidateTitle(v.Title); err != nil {
 		return err
 	}
 	if err := v.WithMultiTeamAssetIDs.Validate(); err != nil {

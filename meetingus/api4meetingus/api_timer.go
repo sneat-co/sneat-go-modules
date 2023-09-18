@@ -1,8 +1,8 @@
 package api4meetingus
 
 import (
-	"github.com/datatug/datatug/packages/server/endpoints"
 	"github.com/sneat-co/sneat-go-core/apicore"
+	"github.com/sneat-co/sneat-go-core/apicore/verify"
 	"github.com/sneat-co/sneat-go-modules/meetingus/facade4meetingus"
 	"github.com/strongo/validation"
 	"net/http"
@@ -28,11 +28,7 @@ func ToggleMemberTimer(params facade4meetingus.Params) func(w http.ResponseWrite
 
 func toggleTimerEndpoint(params facade4meetingus.Params, requestValidator func(request facade4meetingus.ToggleTimerRequest) error) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
-		ctx, userContext, err := apicore.VerifyRequestAndCreateUserContext(w, r, endpoints.VerifyRequest{
-			MinContentLength: apicore.MinJSONRequestSize,
-			MaxContentLength: apicore.KB,
-			AuthRequired:     true,
-		})
+		ctx, userContext, err := apicore.VerifyRequestAndCreateUserContext(w, r, verify.DefaultJsonWithAuthRequired)
 		if err != nil {
 			return
 		}

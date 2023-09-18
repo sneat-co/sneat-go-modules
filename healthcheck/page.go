@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 	"github.com/dal-go/dalgo/dal"
-	"github.com/datatug/datatug/packages/server/endpoints"
 	"github.com/sneat-co/sneat-go-core/apicore"
+	"github.com/sneat-co/sneat-go-core/apicore/verify"
 	"github.com/sneat-co/sneat-go-core/facade"
 	"log"
 	"net/http"
@@ -14,11 +14,7 @@ import (
 
 // httpGetPage renders health-check page
 func httpGetPage(w http.ResponseWriter, r *http.Request) {
-	ctx, _, err := apicore.VerifyRequestAndCreateUserContext(w, r, endpoints.VerifyRequest{
-		MinContentLength: 0,
-		MaxContentLength: 0,
-		AuthRequired:     false,
-	})
+	ctx, _, err := apicore.VerifyRequestAndCreateUserContext(w, r, verify.DefaultJsonWithAuthRequired)
 	if err != nil {
 		log.Println("VerifyRequest error:", err)
 		//api4meetingus.ReturnError(ctx, w, err)

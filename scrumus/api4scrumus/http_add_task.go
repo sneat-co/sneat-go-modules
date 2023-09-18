@@ -1,8 +1,8 @@
 package api4scrumus
 
 import (
-	"github.com/datatug/datatug/packages/server/endpoints"
 	"github.com/sneat-co/sneat-go-core/apicore"
+	"github.com/sneat-co/sneat-go-core/apicore/verify"
 	"github.com/sneat-co/sneat-go-modules/scrumus/facade4scrumus"
 	"net/http"
 )
@@ -11,11 +11,7 @@ var addTask = facade4scrumus.AddTask
 
 // httpPostAddTask adds a task
 func httpPostAddTask(w http.ResponseWriter, r *http.Request) {
-	ctx, userContext, err := apicore.VerifyRequestAndCreateUserContext(w, r, endpoints.VerifyRequest{
-		MinContentLength: apicore.MinJSONRequestSize,
-		MaxContentLength: 10 * apicore.KB,
-		AuthRequired:     true,
-	})
+	ctx, userContext, err := apicore.VerifyRequestAndCreateUserContext(w, r, verify.DefaultJsonWithAuthRequired)
 	if err != nil {
 		return
 	}
