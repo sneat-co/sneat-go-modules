@@ -10,7 +10,6 @@ require (
 	github.com/olebedev/when v1.0.0
 	github.com/sneat-co/sneat-core-modules v0.0.1
 	github.com/sneat-co/sneat-go-core v0.5.0
-	github.com/sneat-co/sneat-go-firebase v0.0.1
 	github.com/sneat-co/sneat-go-testdb v0.0.1
 	github.com/stretchr/testify v1.8.4
 	github.com/strongo/random v0.0.1
@@ -23,18 +22,13 @@ require (
 	cloud.google.com/go/compute v1.19.3 // indirect
 	cloud.google.com/go/compute/metadata v0.2.3 // indirect
 	cloud.google.com/go/firestore v1.12.0 // indirect
-	cloud.google.com/go/iam v0.13.0 // indirect
 	cloud.google.com/go/longrunning v0.5.0 // indirect
-	cloud.google.com/go/storage v1.30.1 // indirect
-	firebase.google.com/go/v4 v4.12.0 // indirect
 	github.com/AlekSi/pointer v1.0.0 // indirect
-	github.com/MicahParks/keyfunc v1.9.0 // indirect
 	github.com/alexsergivan/transliterator v1.0.0 // indirect
 	github.com/bots-go-framework/bots-go-core v0.0.1 // indirect
 	github.com/crediterra/money v0.2.0 // indirect
 	github.com/dal-go/dalgo2buntdb v0.7.17 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/golang-jwt/jwt/v4 v4.5.0 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/mock v1.6.0 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
@@ -75,7 +69,6 @@ require (
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
 	google.golang.org/api v0.126.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
-	google.golang.org/appengine/v2 v2.0.2 // indirect
 	google.golang.org/genproto v0.0.0-20230530153820-e85fd2cbaebc // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20230530153820-e85fd2cbaebc // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20230530153820-e85fd2cbaebc // indirect
