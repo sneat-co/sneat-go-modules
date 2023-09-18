@@ -10,11 +10,11 @@ import (
 )
 
 func TestAddTask(t *testing.T) {
-	userContext := facade.NewUser("user1")
 
 	t.Skip("TODO: re-enable")
 	//var db dal.DB
 	//testdb.NewMockDB(t, db, testdb.WithProfile1())
+	userContext := facade.NewUser("user1")
 
 	t.Run("empty request", func(t *testing.T) {
 		if _, err := AddTask(context.Background(), userContext, AddTaskRequest{}); err == nil {
