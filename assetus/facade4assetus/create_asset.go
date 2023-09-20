@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 	"github.com/dal-go/dalgo/dal"
-	"github.com/sneat-co/sneat-go-core/facade"
-	dbmodels2 "github.com/sneat-co/sneat-go-core/models/dbmodels"
 	"github.com/sneat-co/sneat-core-modules/teamus/dal4teamus"
 	"github.com/sneat-co/sneat-core-modules/teamus/dto4teamus"
+	"github.com/sneat-co/sneat-go-core/facade"
+	dbmodels2 "github.com/sneat-co/sneat-go-core/models/dbmodels"
 	"github.com/sneat-co/sneat-go-modules/assetus/const4assetus"
 	"github.com/sneat-co/sneat-go-modules/assetus/dal4assetus"
 	"github.com/sneat-co/sneat-go-modules/assetus/models4assetus"
@@ -56,7 +56,7 @@ func CreateAsset(ctx context.Context, user facade.User, request CreateAssetReque
 	if err = request.Validate(); err != nil {
 		return
 	}
-	err = dal4teamus.CreateTeamItem(ctx, user, "assets", request.TeamRequest, const4assetus.ModuleID,
+	err = dal4teamus.CreateTeamItem(ctx, user, "assets", request.TeamRequest, const4assetus.ModuleID, new(models4assetus.AssetusTeamDto),
 		func(ctx context.Context, tx dal.ReadwriteTransaction, params *dal4teamus.ModuleTeamWorkerParams[*models4assetus.AssetusTeamDto]) (err error) {
 			modified := dbmodels2.Modified{
 				By: user.GetID(),

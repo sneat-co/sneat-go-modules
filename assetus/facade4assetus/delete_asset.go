@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 	"github.com/dal-go/dalgo/dal"
-	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-core-modules/teamus/dal4teamus"
+	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-go-modules/assetus/const4assetus"
 	"github.com/sneat-co/sneat-go-modules/assetus/dal4assetus"
 	"github.com/sneat-co/sneat-go-modules/assetus/models4assetus"
@@ -25,6 +25,8 @@ func DeleteAsset(ctx context.Context, user facade.User, request dal4teamus.TeamI
 		ShortID:            request.ID,
 		TeamItem:           dal.NewRecord(dal.NewKeyWithID(dal4assetus.AssetsCollection, request.ID)),
 	}
-	err = dal4teamus.DeleteTeamItem(ctx, user, input, const4assetus.ModuleID, nil)
+	err = dal4teamus.DeleteTeamItem(ctx, user, input, const4assetus.ModuleID, new(models4assetus.AssetusTeamDto), func(ctx context.Context, tx dal.ReadwriteTransaction, params *dal4teamus.TeamItemWorkerParams) (err error) {
+		return errors.New("not implemented")
+	})
 	return
 }

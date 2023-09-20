@@ -5,9 +5,9 @@ import (
 	"errors"
 	"fmt"
 	"github.com/dal-go/dalgo/dal"
+	"github.com/sneat-co/sneat-core-modules/teamus/dal4teamus"
 	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-go-core/models/dbmodels"
-	"github.com/sneat-co/sneat-core-modules/teamus/dal4teamus"
 	"github.com/sneat-co/sneat-go-modules/schedulus/const4schedulus"
 	"github.com/sneat-co/sneat-go-modules/schedulus/dto4schedulus"
 	"github.com/sneat-co/sneat-go-modules/schedulus/models4schedulus"
@@ -26,6 +26,7 @@ func CancelHappening(ctx context.Context, user facade.User, request dto4schedulu
 	happening := models4schedulus.NewHappeningContext(request.HappeningID)
 	err = dal4teamus.RunModuleTeamWorker(ctx, user, request.TeamRequest,
 		const4schedulus.ModuleID,
+		new(models4schedulus.SchedulusTeamDto),
 		func(ctx context.Context, tx dal.ReadwriteTransaction, params *dal4teamus.ModuleTeamWorkerParams[*models4schedulus.SchedulusTeamDto]) (err error) {
 			if err = tx.Get(ctx, happening.Record); err != nil {
 				return fmt.Errorf("failed to get happening: %w", err)

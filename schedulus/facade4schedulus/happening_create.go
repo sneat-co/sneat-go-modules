@@ -5,9 +5,9 @@ import (
 	"errors"
 	"fmt"
 	"github.com/dal-go/dalgo/dal"
+	"github.com/sneat-co/sneat-core-modules/teamus/dal4teamus"
 	"github.com/sneat-co/sneat-go-core/facade"
 	dbmodels2 "github.com/sneat-co/sneat-go-core/models/dbmodels"
-	"github.com/sneat-co/sneat-core-modules/teamus/dal4teamus"
 	"github.com/sneat-co/sneat-go-modules/schedulus/const4schedulus"
 	"github.com/sneat-co/sneat-go-modules/schedulus/dto4schedulus"
 	"github.com/sneat-co/sneat-go-modules/schedulus/models4schedulus"
@@ -48,6 +48,7 @@ func CreateHappening(
 	}
 	err = dal4teamus.CreateTeamItem(ctx, user, counter, request.TeamRequest,
 		const4schedulus.ModuleID,
+		new(models4schedulus.SchedulusTeamDto),
 		func(ctx context.Context, tx dal.ReadwriteTransaction, params *dal4teamus.ModuleTeamWorkerParams[*models4schedulus.SchedulusTeamDto]) (err error) {
 			if !params.Team.Data.HasUserID(params.UserID) {
 				return errors.New("current user does not have access to this team")
