@@ -67,7 +67,7 @@ func (v ListBase) Validate() error {
 type ListGroup struct {
 	Type  string                `json:"type" firestore:"type"`
 	Title string                `json:"title" firestore:"title"`
-	Lists map[string]*ListBrief `json:"lists,omitempty" ,omitempty"`
+	Lists map[string]*ListBrief `json:"lists,omitempty"`
 }
 
 // Validate returns error if not valid
