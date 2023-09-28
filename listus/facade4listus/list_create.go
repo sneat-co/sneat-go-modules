@@ -32,12 +32,12 @@ func CreateList(ctx context.Context, user facade.User, request CreateListRequest
 			}
 			id := request.Type
 			idTryNumber := 0
+			idLen := 2               // must be before checkId label
+			idGenerationAttempt := 0 // must be before checkId label
 		checkId:
 			if idTryNumber++; idTryNumber == 10 {
 				return errors.New("too many attempts to generate random list ContactID")
 			}
-			idGenerationAttempt := 0
-			idLen := 2
 			for briefID := range params.TeamModuleEntry.Data.Lists {
 				if briefID == id {
 					id = random.ID(idLen)
