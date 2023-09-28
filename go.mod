@@ -7,8 +7,8 @@ require (
 	github.com/bots-go-framework/bots-fw-store v0.1.0
 	github.com/dal-go/dalgo v0.12.0
 	github.com/olebedev/when v1.0.0
-	github.com/sneat-co/sneat-core-modules v0.0.6
-	github.com/sneat-co/sneat-go-core v0.9.2
+	github.com/sneat-co/sneat-core-modules v0.2.3
+	github.com/sneat-co/sneat-go-core v0.11.1
 	github.com/stretchr/testify v1.8.4
 	github.com/strongo/random v0.0.1
 	github.com/strongo/slice v0.1.4

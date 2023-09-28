@@ -1,6 +1,7 @@
 package models4listus
 
 import (
+	"github.com/sneat-co/sneat-go-core/models/dbmodels"
 	"github.com/strongo/validation"
 	"strings"
 )
@@ -24,6 +25,7 @@ func (v ListItemBase) Validate() error {
 type ListItemBrief struct {
 	ID string `json:"id" firestore:"id"`
 	ListItemBase
+	dbmodels.WithCreated
 }
 
 // Validate returns error if not valid
@@ -32,6 +34,9 @@ func (v ListItemBrief) Validate() error {
 		return validation.NewErrRecordIsMissingRequiredField("id")
 	}
 	if err := v.ListItemBase.Validate(); err != nil {
+		return err
+	}
+	if err := v.WithCreated.Validate(); err != nil {
 		return err
 	}
 	return nil

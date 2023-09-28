@@ -120,7 +120,7 @@ var GetMeetingAndTeam = func(ctx context.Context, tx dal.ReadwriteTransaction, u
 	if !params.Meeting.Record.Exists() {
 		meeting := params.Meeting.Data()
 		team := params.Team.Data
-		contactusTeam := dal4contactus.NewContactusTeamContext(params.Team.ID)
+		contactusTeam := dal4contactus.NewContactusTeamModuleEntry(params.Team.ID)
 		if err := tx.Get(ctx, contactusTeam.Record); err != nil {
 			return params, fmt.Errorf("failed to get contactus team record: %w", err)
 		}

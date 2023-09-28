@@ -4,6 +4,7 @@ import (
 	"github.com/dal-go/dalgo/dal"
 	"github.com/dal-go/dalgo/record"
 	"github.com/sneat-co/sneat-core-modules/teamus/dal4teamus"
+	"github.com/sneat-co/sneat-go-modules/listus/const4listus"
 	"github.com/sneat-co/sneat-go-modules/listus/models4listus"
 )
 
@@ -14,8 +15,8 @@ type ListContext struct {
 
 // NewTeamListKey creates new list key
 func NewTeamListKey(teamID, id string) *dal.Key {
-	teamKey := dal4teamus.NewTeamKey(teamID)
-	return dal.NewKeyWithParentAndID(teamKey, models4listus.TeamListsCollection, id)
+	teamModuleKey := dal4teamus.NewTeamModuleKey(teamID, const4listus.ModuleID)
+	return dal.NewKeyWithParentAndID(teamModuleKey, models4listus.ListsCollection, id)
 }
 
 func NewTeamListContext(teamID, listID string) (list ListContext) {

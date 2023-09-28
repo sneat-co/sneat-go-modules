@@ -3,11 +3,11 @@ package bot4listus
 import (
 	"fmt"
 	"github.com/bots-go-framework/bots-fw/botsfw"
-	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-core-modules/teamus/core4teamus"
 	"github.com/sneat-co/sneat-core-modules/teamus/dto4teamus"
 	"github.com/sneat-co/sneat-core-modules/userus/facade4userus"
 	"github.com/sneat-co/sneat-core-modules/userus/models4userus"
+	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-go-modules/listus/facade4listus"
 	"github.com/sneat-co/sneat-go-modules/listus/models4listus"
 	"strings"
@@ -61,7 +61,7 @@ var addBuyItemCommand = botsfw.Command{
 					TeamID: teamID,
 				},
 			},
-			Items: []models4listus.ListItemBrief{
+			Items: []facade4listus.CreateListItemRequest{
 				{
 					ListItemBase: models4listus.ListItemBase{
 						Title: text,

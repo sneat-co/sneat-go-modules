@@ -2,6 +2,7 @@ package facade4listus
 
 import (
 	"fmt"
+	"github.com/sneat-co/sneat-go-core/validate"
 	"github.com/sneat-co/sneat-go-modules/listus/models4listus"
 	"github.com/strongo/validation"
 	"strings"
@@ -10,7 +11,7 @@ import (
 // CreateListItemsRequest DTO
 type CreateListItemsRequest struct {
 	ListRequest
-	Items []models4listus.ListItemBrief `json:"items"`
+	Items []CreateListItemRequest `json:"items"`
 }
 
 // Validate returns error if not valid
@@ -22,6 +23,23 @@ func (v CreateListItemsRequest) Validate() error {
 		if err := item.Validate(); err != nil {
 			return validation.NewErrBadRequestFieldValue(fmt.Sprintf("items[%v]", i), err.Error())
 		}
+	}
+	return nil
+}
+
+type CreateListItemRequest struct {
+	ID string `json:"id"`
+	models4listus.ListItemBase
+}
+
+func (v CreateListItemRequest) Validate() error {
+	if strings.TrimSpace(v.ID) != "" {
+		if err := validate.RecordID(v.ID); err != nil {
+			return validation.NewErrBadRequestFieldValue("id", err.Error())
+		}
+	}
+	if err := v.ListItemBase.Validate(); err != nil {
+		return validation.NewBadRequestError(err)
 	}
 	return nil
 }

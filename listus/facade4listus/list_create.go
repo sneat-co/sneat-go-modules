@@ -24,26 +24,10 @@ func CreateList(ctx context.Context, user facade.User, request CreateListRequest
 	}
 	err = dal4teamus.CreateTeamItem(ctx, user, "", request.TeamRequest, const4listus.ModuleID, new(models4listus.ListusTeamDto),
 		func(ctx context.Context, tx dal.ReadwriteTransaction, params *dal4teamus.ModuleTeamWorkerParams[*models4listus.ListusTeamDto]) (err error) {
-			var listGroup *models4listus.ListGroup
-			for _, lg := range params.TeamModuleEntry.Data.ListGroups {
-				if lg.Type == request.Type {
-					if listGroup != nil {
-						return fmt.Errorf("team record has at least 2 list groups with the same type: %v", lg.Type)
-					}
-					listGroup = lg
-				}
-			}
-			isNewListGroup := listGroup == nil
-			if isNewListGroup {
-				listGroup = &models4listus.ListGroup{Type: request.Type, Title: request.Type}
-				params.TeamModuleEntry.Data.ListGroups = append(params.TeamModuleEntry.Data.ListGroups, listGroup)
-			} else if err = listGroup.Validate(); err != nil {
-				return fmt.Errorf("list group received from team record is not valid: %w", err)
-			}
 
-			for i, brief := range listGroup.Lists {
+			for id, brief := range params.TeamModuleEntry.Data.Lists {
 				if brief.Title == request.Title {
-					return fmt.Errorf("an attempt to create a new list with duplicate title [%v] equal to list at index %v {id=%v, type=%v}", request.Title, i, brief.ID, brief.Type)
+					return fmt.Errorf("an attempt to create a new list with duplicate title [%v] equal to list {id=%v, type=%v}", request.Title, id, brief.Type)
 				}
 			}
 			id := request.Type
@@ -52,9 +36,16 @@ func CreateList(ctx context.Context, user facade.User, request CreateListRequest
 			if idTryNumber++; idTryNumber == 10 {
 				return errors.New("too many attempts to generate random list ContactID")
 			}
-			for _, brief := range listGroup.Lists {
-				if brief.ID == id {
-					id = random.ID(2)
+			idGenerationAttempt := 0
+			idLen := 2
+			for briefID := range params.TeamModuleEntry.Data.Lists {
+				if briefID == id {
+					id = random.ID(idLen)
+					idGenerationAttempt++
+					if idGenerationAttempt > 1000 {
+						idLen++
+						idGenerationAttempt = 0
+					}
 					goto checkId
 				}
 			}
@@ -89,24 +80,27 @@ func CreateList(ctx context.Context, user facade.User, request CreateListRequest
 			if err = tx.Insert(ctx, listRecord); err != nil {
 				return fmt.Errorf("failed to insert list record")
 			}
-			listGroup.Lists = append(listGroup.Lists, &models4listus.ListBrief{
-				ID: id,
+			if params.TeamModuleEntry.Data.Lists == nil {
+				params.TeamModuleEntry.Data.Lists = make(map[string]*models4listus.ListBrief, 1)
+			}
+			listBrief := &models4listus.ListBrief{
 				ListBase: models4listus.ListBase{
 					Type:  request.Type,
 					Title: request.Type,
 				},
-			})
-			if err = listGroup.Validate(); err != nil {
-				return fmt.Errorf("list group is not valid after adding a new list: %w", err)
 			}
-			params.TeamUpdates = append(params.TeamUpdates, dal.Update{
-				Field: "listGroups." + request.Type,
-				Value: listGroup,
-			})
-			if err != nil {
-				return fmt.Errorf("failed to generate new list ContactID: %w", err)
+			params.TeamModuleEntry.Data.Lists[id] = listBrief
+			if params.TeamModuleEntry.Record.Exists() {
+				if err = tx.Insert(ctx, params.TeamModuleEntry.Record); err != nil {
+					return fmt.Errorf("failed to insert team module entry record: %w", err)
+				}
+			} else {
+				params.TeamUpdates = append(params.TeamUpdates, dal.Update{
+					Field: "lists." + id,
+					Value: listBrief,
+				})
 			}
-			return nil
+			return err
 		},
 	)
 	return

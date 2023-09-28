@@ -7,8 +7,8 @@ import (
 	"strings"
 )
 
-// TeamListsCollection defines collection name
-const TeamListsCollection = "lists"
+// ListsCollection defines collection name
+const ListsCollection = "lists"
 
 // ListType list type
 type ListType = string
@@ -65,9 +65,9 @@ func (v ListBase) Validate() error {
 
 // ListGroup DTO
 type ListGroup struct {
-	Type  string       `json:"type" firestore:"type"`
-	Title string       `json:"title" firestore:"title"`
-	Lists []*ListBrief `json:"lists,omitempty" firestore:"lists,omitempty"`
+	Type  string                `json:"type" firestore:"type"`
+	Title string                `json:"title" firestore:"title"`
+	Lists map[string]*ListBrief `json:"lists,omitempty" ,omitempty"`
 }
 
 // Validate returns error if not valid
@@ -78,30 +78,34 @@ func (v ListGroup) Validate() error {
 	if v.Title == "" {
 		return validation.NewErrRecordIsMissingRequiredField("title")
 	}
-	//if l := len(v.Emoji); l > 4 {
-	//	return validation.NewErrBadRecordFieldValue("emoji", fmt.Sprintf("too long: %v", l))
-	//}
-	for i, b := range v.Lists {
-		if err := b.Validate(); err != nil {
-			return fmt.Errorf("invalid list brief at index %v: %w", i, err)
-		}
+	if err := validateListBriefs(v.Lists); err != nil {
+		return validation.NewErrBadRecordFieldValue("lists", err.Error())
 	}
 	return nil
 }
 
 // ListBrief DTO
 type ListBrief struct {
-	ID string `json:"id" firestore:"id"`
 	ListBase
+	ItemsCount int `json:"itemsCount" firestore:"itemsCount"`
+}
+
+func validateListBriefs(lists map[string]*ListBrief) error {
+	for id, list := range lists {
+		if err := list.Validate(); err != nil {
+			return fmt.Errorf("invalid list brief ID=%s: %w", id, err)
+		}
+	}
+	return nil
 }
 
 // Validate returns error if not valid
 func (v ListBrief) Validate() error {
-	if strings.TrimSpace(v.ID) == "" {
-		return validation.NewErrRecordIsMissingRequiredField("id")
-	}
 	if err := v.ListBase.Validate(); err != nil {
 		return err
+	}
+	if v.ItemsCount < 0 {
+		return validation.NewErrBadRecordFieldValue("itemsCount", fmt.Sprintf("should be positive, got: %v", v.ItemsCount))
 	}
 	return nil
 }
