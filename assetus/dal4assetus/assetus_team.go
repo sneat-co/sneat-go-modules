@@ -13,4 +13,4 @@ type AssetusTeamContext = record.DataWithID[string, *models4assetus.AssetusTeamD
 // AssetsCollection is a name of a collection in DB
 const AssetsCollection = "assets"
 
-var AssetusRootKey = dal.NewKeyWithID(dal4teamus.Collection, const4assetus.ModuleID)
+var AssetusRootKey = dal.NewKeyWithID(dal4teamus.TeamModulesCollection, const4assetus.ModuleID)

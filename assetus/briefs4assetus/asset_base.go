@@ -1,6 +1,7 @@
 package briefs4assetus
 
 import (
+	"errors"
 	"fmt"
 	"github.com/sneat-co/sneat-go-core/geo"
 	"github.com/sneat-co/sneat-go-core/models/dbmodels"
@@ -31,6 +32,9 @@ func (v *AssetBrief) Equal(v2 *AssetBrief) bool {
 
 // Validate returns error if not valid
 func (v *AssetBrief) Validate() error {
+	if v == nil {
+		return errors.New("can not be nil")
+	}
 	if !v.IsRequest && v.Make == "" && v.Model == "" && v.RegNumber == "" && strings.TrimSpace(v.Title) == "" {
 		return validation.NewErrRecordIsMissingRequiredField("title")
 	}

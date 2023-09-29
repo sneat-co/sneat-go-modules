@@ -2,12 +2,14 @@ module github.com/sneat-co/sneat-go-modules
 
 go 1.21.0
 
+//replace github.com/sneat-co/sneat-core-modules => ../sneat-core-modules
+
 require (
 	github.com/bots-go-framework/bots-fw v0.21.5
 	github.com/bots-go-framework/bots-fw-store v0.1.0
 	github.com/dal-go/dalgo v0.12.0
 	github.com/olebedev/when v1.0.0
-	github.com/sneat-co/sneat-core-modules v0.2.4
+	github.com/sneat-co/sneat-core-modules v0.3.0
 	github.com/sneat-co/sneat-go-core v0.12.0
 	github.com/stretchr/testify v1.8.4
 	github.com/strongo/random v0.0.1

@@ -14,7 +14,7 @@ type RetroTeam = record.DataWithID[string, *models4retrospectus.RetroTeamDto]
 
 func NewRetroTeamKey(id string) *dal.Key {
 	teamKey := dal4teamus.NewTeamKey(id)
-	return dal.NewKeyWithParentAndID(teamKey, dal4teamus.Collection, RetrospectusModuleID)
+	return dal.NewKeyWithParentAndID(teamKey, dal4teamus.TeamModulesCollection, RetrospectusModuleID)
 }
 
 func NewRetroTeam(id string) RetroTeam {

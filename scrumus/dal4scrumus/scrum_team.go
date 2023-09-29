@@ -14,7 +14,7 @@ type ScrumTeam = record.DataWithID[string, *models4scrumus.ScrumTeamDto]
 
 func NewScrumTeamKey(id string) *dal.Key {
 	teamKey := dal4teamus.NewTeamKey(id)
-	return dal.NewKeyWithParentAndID(teamKey, dal4teamus.Collection, ScrumusModuleID)
+	return dal.NewKeyWithParentAndID(teamKey, dal4teamus.TeamModulesCollection, ScrumusModuleID)
 }
 
 func NewScrumTeam(id string) ScrumTeam {

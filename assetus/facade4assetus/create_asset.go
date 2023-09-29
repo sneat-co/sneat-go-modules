@@ -58,27 +58,57 @@ func CreateAsset(ctx context.Context, user facade.User, request CreateAssetReque
 	}
 	err = dal4teamus.CreateTeamItem(ctx, user, "assets", request.TeamRequest, const4assetus.ModuleID, new(models4assetus.AssetusTeamDto),
 		func(ctx context.Context, tx dal.ReadwriteTransaction, params *dal4teamus.ModuleTeamWorkerParams[*models4assetus.AssetusTeamDto]) (err error) {
-			modified := dbmodels2.Modified{
-				By: user.GetID(),
-				At: time.Now(),
-			}
-			response.ID = random.ID(7) // TODO: consider using incomplete key with options?
-			assetExtraData := request.DbData.AssetExtraData()
-			assetExtraData.UserIDs = []string{user.GetID()}
-			assetExtraData.WithModified = dbmodels2.NewWithModified(modified.At, modified.By)
-			assetExtraData.WithTeamIDs = dbmodels2.WithSingleTeamID(request.TeamRequest.TeamID)
-
-			//assetMainData := request.DbData.AssetMainDto()
-			//assetMainData.ContactIDs = []string{"*"} // Required value, TODO: use constant
-			//assetMainData.AssetIDs = []string{"*"}   // Required value, TODO: use constant
-			assetKey := dal.NewKeyWithParentAndID(dal4assetus.AssetusRootKey, dal4assetus.AssetsCollection, response.ID)
-			assetRecord := dal.NewRecordWithData(assetKey, request.DbData)
-			if err = tx.Insert(ctx, assetRecord); err != nil {
-				return fmt.Errorf("failed to insert response record")
-			}
-			return nil
+			response, err = createAssetTx(ctx, tx, request, params)
+			return err
 		},
 	)
 	response.Data = request.DbData
 	return
+}
+
+func createAssetTx(
+	ctx context.Context,
+	tx dal.ReadwriteTransaction,
+	request CreateAssetRequest,
+	params *dal4teamus.ModuleTeamWorkerParams[*models4assetus.AssetusTeamDto],
+) (
+	response CreateAssetResponse, err error,
+) {
+	modified := dbmodels2.Modified{
+		By: params.UserID,
+		At: time.Now(),
+	}
+	response.ID = random.ID(7) // TODO: consider using incomplete key with options?
+	assetExtraData := request.DbData.AssetExtraData()
+	assetExtraData.UserIDs = []string{params.UserID}
+	assetExtraData.WithModified = dbmodels2.NewWithModified(modified.At, modified.By)
+	assetExtraData.WithTeamIDs = dbmodels2.WithSingleTeamID(request.TeamRequest.TeamID)
+
+	//assetMainData := request.DbData.AssetMainDto()
+	//assetMainData.ContactIDs = []string{"*"} // Required value, TODO: use constant
+	//assetMainData.AssetIDs = []string{"*"}   // Required value, TODO: use constant
+
+	assetKey := dal4teamus.NewTeamModuleItemKey(request.TeamID, const4assetus.ModuleID, dal4assetus.AssetsCollection, response.ID)
+	assetRecord := dal.NewRecordWithData(assetKey, request.DbData)
+	if err = tx.Insert(ctx, assetRecord); err != nil {
+		return response, fmt.Errorf("failed to insert response record")
+	}
+
+	assetusTeamModuleUpdates := params.TeamModuleEntry.Data.WithAssets.AddAsset(response.ID, &request.DbData.AssetMainData().AssetBrief)
+
+	if err = params.TeamModuleEntry.Data.Validate(); err != nil {
+		return response, fmt.Errorf("assetus team module record is not valid before saving to db: %w", err)
+	}
+
+	if params.TeamModuleEntry.Record.Exists() {
+		if err = tx.Update(ctx, params.TeamModuleEntry.Record.Key(), assetusTeamModuleUpdates); err != nil {
+			return
+		}
+	} else {
+		if err = tx.Insert(ctx, params.TeamModuleEntry.Record); err != nil {
+			return
+		}
+	}
+
+	return response, err
 }

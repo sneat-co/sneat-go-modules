@@ -1,8 +1,8 @@
 package models4assetus
 
 import (
-	dbmodels2 "github.com/sneat-co/sneat-go-core/models/dbmodels"
 	"github.com/sneat-co/sneat-core-modules/contactus/briefs4contactus"
+	dbmodels2 "github.com/sneat-co/sneat-go-core/models/dbmodels"
 	"github.com/sneat-co/sneat-go-core/validate"
 	"github.com/sneat-co/sneat-go-modules/assetus/briefs4assetus"
 )
@@ -34,7 +34,7 @@ type AssetDbData interface {
 // but it was not a good idea as not clear how to manage module specific fields
 type AssetMainDto struct {
 	briefs4assetus.AssetBrief
-	briefs4assetus.WithMultiTeamAssetBriefs
+	briefs4assetus.WithAssetusTeamBriefs[*briefs4assetus.AssetBrief]
 	dbmodels2.WithTags
 	briefs4contactus.WithMultiTeamContactIDs
 	dbmodels2.WithCustomFields
@@ -49,7 +49,7 @@ func (v *AssetMainDto) Validate() error {
 	if err := v.AssetBrief.Validate(); err != nil {
 		return err
 	}
-	if err := v.WithMultiTeamAssetBriefs.Validate(); err != nil {
+	if err := v.WithAssetusTeamBriefs.Validate(); err != nil {
 		return err
 	}
 	if err := v.WithTags.Validate(); err != nil {
