@@ -5,10 +5,10 @@ import (
 	"errors"
 	"fmt"
 	"github.com/dal-go/dalgo/dal"
+	"github.com/sneat-co/sneat-core-modules/userus/facade4userus"
+	"github.com/sneat-co/sneat-core-modules/userus/models4userus"
 	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-go-core/models/dbmodels"
-	"github.com/sneat-co/sneat-core-modules/userus/facade4userus"
-	models4userus2 "github.com/sneat-co/sneat-core-modules/userus/models4userus"
 	"github.com/sneat-co/sneat-go-modules/scrumus/models4scrumus"
 	"github.com/strongo/random"
 	"github.com/strongo/validation"
@@ -40,8 +40,8 @@ func AddComment(ctx context.Context, userContext facade.User, request AddComment
 
 	uid := userContext.GetID()
 
-	userKey := models4userus2.NewUserKey(uid)
-	var user models4userus2.UserDto
+	userKey := models4userus.NewUserKey(uid)
+	var user models4userus.UserDto
 	userRecord := dal.NewRecordWithData(userKey, &user)
 	if err = facade4userus.GetUserByID(ctx, db, userRecord); err != nil {
 		return nil, err

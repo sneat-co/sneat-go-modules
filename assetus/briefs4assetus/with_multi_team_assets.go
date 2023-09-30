@@ -2,13 +2,13 @@ package briefs4assetus
 
 import (
 	"github.com/dal-go/dalgo/dal"
-	dbmodels2 "github.com/sneat-co/sneat-go-core/models/dbmodels"
+	"github.com/sneat-co/sneat-go-core/models/dbmodels"
 	"github.com/strongo/validation"
 )
 
 // Asset is an interface restriction for asset briefs to use in generic types
 type Asset interface {
-	dbmodels2.RelatedAs
+	dbmodels.RelatedAs
 }
 
 type AssetusTeamBrief[T Asset] struct {
@@ -31,6 +31,10 @@ func (v *WithAssets[T]) AddAsset(assetID string, assetBrief T) (updates []dal.Up
 	v.Assets[assetID] = assetBrief
 	updates = append(updates, dal.Update{Field: "assets." + assetID, Value: assetBrief})
 	return
+}
+
+func (v *WithAssets[T]) GetAssetBriefByID(id string) (brief T) {
+	return v.Assets[id]
 }
 
 // Validate returns error if not valid

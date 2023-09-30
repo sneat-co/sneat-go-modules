@@ -2,8 +2,8 @@ package models4schedulus
 
 import (
 	"fmt"
-	dbmodels2 "github.com/sneat-co/sneat-go-core/models/dbmodels"
 	"github.com/sneat-co/sneat-core-modules/contactus/briefs4contactus"
+	"github.com/sneat-co/sneat-go-core/models/dbmodels"
 	"github.com/strongo/validation"
 	"strings"
 )
@@ -11,9 +11,9 @@ import (
 // HappeningDto DTO
 type HappeningDto struct {
 	HappeningBase
-	dbmodels2.WithTags
-	dbmodels2.WithUserIDs
-	dbmodels2.WithTeamDates
+	dbmodels.WithTags
+	dbmodels.WithUserIDs
+	dbmodels.WithTeamDates
 	briefs4contactus.WithMultiTeamContacts[*briefs4contactus.ContactBrief]
 }
 

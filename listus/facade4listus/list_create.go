@@ -7,7 +7,7 @@ import (
 	"github.com/dal-go/dalgo/dal"
 	"github.com/sneat-co/sneat-core-modules/teamus/dal4teamus"
 	"github.com/sneat-co/sneat-go-core/facade"
-	dbmodels2 "github.com/sneat-co/sneat-go-core/models/dbmodels"
+	"github.com/sneat-co/sneat-go-core/models/dbmodels"
 	"github.com/sneat-co/sneat-go-modules/listus/const4listus"
 	"github.com/sneat-co/sneat-go-modules/listus/dal4listus"
 	"github.com/sneat-co/sneat-go-modules/listus/models4listus"
@@ -49,22 +49,22 @@ func CreateList(ctx context.Context, user facade.User, request CreateListRequest
 					goto checkId
 				}
 			}
-			modified := dbmodels2.Modified{
+			modified := dbmodels.Modified{
 				By: user.GetID(),
 				At: time.Now(),
 			}
 			list := models4listus.ListDto{
-				WithModified: dbmodels2.WithModified{
-					WithCreated: dbmodels2.WithCreated{
+				WithModified: dbmodels.WithModified{
+					WithCreated: dbmodels.WithCreated{
 						CreatedAt: modified.At,
 						CreatedBy: modified.By,
 					},
-					WithUpdated: dbmodels2.WithUpdated{
+					WithUpdated: dbmodels.WithUpdated{
 						UpdatedAt: modified.At,
 						UpdatedBy: modified.By,
 					},
 				},
-				WithTeamIDs: dbmodels2.WithTeamIDs{
+				WithTeamIDs: dbmodels.WithTeamIDs{
 					TeamIDs: []string{request.TeamID},
 				},
 				ListBase: models4listus.ListBase{

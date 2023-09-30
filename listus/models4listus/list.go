@@ -2,7 +2,7 @@ package models4listus
 
 import (
 	"fmt"
-	dbmodels2 "github.com/sneat-co/sneat-go-core/models/dbmodels"
+	"github.com/sneat-co/sneat-go-core/models/dbmodels"
 	"github.com/strongo/validation"
 	"strings"
 )
@@ -113,9 +113,9 @@ func (v ListBrief) Validate() error {
 // ListDto DTO
 type ListDto struct {
 	ListBase
-	dbmodels2.WithModified
-	dbmodels2.WithUserIDs
-	dbmodels2.WithTeamIDs
+	dbmodels.WithModified
+	dbmodels.WithUserIDs
+	dbmodels.WithTeamIDs
 
 	Items []*ListItemBrief `json:"items,omitempty" firestore:"items,omitempty"`
 	Count int              `json:"count" firestore:"count"`

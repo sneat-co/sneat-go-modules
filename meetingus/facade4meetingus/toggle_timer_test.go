@@ -5,7 +5,7 @@ import (
 	"github.com/sneat-co/sneat-core-modules/teamus/dto4teamus"
 	"github.com/sneat-co/sneat-core-modules/teamus/models4teamus"
 	"github.com/sneat-co/sneat-go-core/facade"
-	dbmodels2 "github.com/sneat-co/sneat-go-core/models/dbmodels"
+	"github.com/sneat-co/sneat-go-core/models/dbmodels"
 	"github.com/sneat-co/sneat-go-modules/meetingus/models4meetingus"
 	"testing"
 	"time"
@@ -43,7 +43,7 @@ func TestToggleTimer(t *testing.T) { // TODO(help-wanted): add more test cases
 		t *testing.T,
 		existingMeetingRecord bool,
 		request ToggleTimerRequest,
-		timestamps []dbmodels2.Timestamp,
+		timestamps []dbmodels.Timestamp,
 		expected expecting,
 		initMeeting func(meeting *models4meetingus.Meeting),
 		assert func(response ToggleTimerResponse, meeting models4meetingus.Meeting, team models4teamus.TeamDto),
@@ -111,7 +111,7 @@ func TestToggleTimer(t *testing.T) { // TODO(help-wanted): add more test cases
 						meeting.Started = &now
 						meeting.Version = 1
 						meeting.Timer = &models4meetingus.Timer{
-							By: dbmodels2.ByUser{
+							By: dbmodels.ByUser{
 								UID: "u1",
 							},
 							Status: TimerStatusActive,

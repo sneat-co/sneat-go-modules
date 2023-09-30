@@ -7,7 +7,7 @@ import (
 	"github.com/dal-go/dalgo/dal"
 	"github.com/sneat-co/sneat-core-modules/teamus/dal4teamus"
 	"github.com/sneat-co/sneat-go-core/facade"
-	dbmodels2 "github.com/sneat-co/sneat-go-core/models/dbmodels"
+	"github.com/sneat-co/sneat-go-core/models/dbmodels"
 	"github.com/sneat-co/sneat-go-modules/schedulus/const4schedulus"
 	"github.com/sneat-co/sneat-go-modules/schedulus/dto4schedulus"
 	"github.com/sneat-co/sneat-go-modules/schedulus/models4schedulus"
@@ -32,8 +32,8 @@ func CreateHappening(
 	}
 	happeningDto := &models4schedulus.HappeningDto{
 		HappeningBase: request.Dto.HappeningBase,
-		WithTeamDates: dbmodels2.WithTeamDates{
-			WithTeamIDs: dbmodels2.WithTeamIDs{
+		WithTeamDates: dbmodels.WithTeamDates{
+			WithTeamIDs: dbmodels.WithTeamIDs{
 				TeamIDs: []string{request.TeamID},
 			},
 		},

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/dal-go/dalgo/dal"
 	"github.com/sneat-co/sneat-core-modules/teamus/dal4teamus"
-	models4userus2 "github.com/sneat-co/sneat-core-modules/userus/models4userus"
+	"github.com/sneat-co/sneat-core-modules/userus/models4userus"
 	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-go-modules/retrospectus/dal4retrospectus"
 	"github.com/sneat-co/sneat-go-modules/retrospectus/models4retrospectus"
@@ -18,11 +18,11 @@ func FixCounts(ctx context.Context, userContext facade.User, request FixCountsRe
 	db := facade.GetDatabase(ctx)
 	return db.RunReadwriteTransaction(ctx, func(ctx context.Context, tx dal.ReadwriteTransaction) error {
 		now := time.Now()
-		userRef := models4userus2.NewUserKey(uid)
+		userRef := models4userus.NewUserKey(uid)
 		team := dal4teamus.NewTeamContext(request.TeamID)
 		var retroTeam dal4retrospectus.RetroTeam
 		retroTeam, err = dal4retrospectus.GetRetroTeam(ctx, tx, request.TeamID)
-		user := new(models4userus2.UserDto)
+		user := new(models4userus.UserDto)
 		userRecord := dal.NewRecordWithData(userRef, user)
 
 		if err := tx.GetMulti(ctx, []dal.Record{userRecord, team.Record}); err != nil {

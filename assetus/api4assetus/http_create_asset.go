@@ -21,12 +21,12 @@ func httpPostCreateAsset(w http.ResponseWriter, r *http.Request) {
 	case const4assetus.AssetCategoryVehicle:
 		asset := models4assetus.NewVehicleAssetDbData()
 		asset.Title = asset.GenerateTitle()
-		request.Asset = asset.VehicleAssetMainData
+		request.Asset = &asset.VehicleAssetMainData
 		request.DbData = asset
-	case const4assetus.AssetCategoryRealEstate:
-		asset := models4assetus.NewDwellingAssetDbData()
-		request.Asset = asset.DwellingAssetMainDto
-		request.DbData = asset
+	//case const4assetus.AssetCategoryRealEstate:
+	//	asset := models4assetus.NewDwellingAssetDbData()
+	//	request.Asset = &asset.AssetDtoDwelling
+	//	request.DbData = asset
 	case const4assetus.AssetCategoryDocument:
 		asset := models4assetus.NewDocumentDbData()
 		request.Asset = asset.DocumentMainData

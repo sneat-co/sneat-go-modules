@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/dal-go/dalgo/dal"
 	"github.com/sneat-co/sneat-core-modules/userus/facade4userus"
-	models4userus2 "github.com/sneat-co/sneat-core-modules/userus/models4userus"
+	"github.com/sneat-co/sneat-core-modules/userus/models4userus"
 	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-go-core/validate"
 	"github.com/sneat-co/sneat-go-modules/meetingus/facade4meetingus"
@@ -98,8 +98,8 @@ UniqueID:
 func addRetroItemToUserRetro(ctx context.Context, userContext facade.User, request AddRetroItemRequest) (response AddRetroItemResponse, err error) {
 	uid := userContext.GetID()
 
-	user := new(models4userus2.UserDto)
-	userKey := dal.NewKeyWithID(models4userus2.UsersCollection, uid)
+	user := new(models4userus.UserDto)
+	userKey := dal.NewKeyWithID(models4userus.UsersCollection, uid)
 	userRecord := dal.NewRecordWithData(userKey, user)
 
 	db := facade.GetDatabase(ctx)
@@ -161,8 +161,8 @@ func addRetroItemToTeamRetro(ctx context.Context, userContext facade.User, reque
 	uid := userContext.GetID()
 	retrospectiveKey := getTeamRetroDocKey(request.TeamID, request.MeetingID)
 
-	user := new(models4userus2.UserDto)
-	userKey := dal.NewKeyWithID(models4userus2.UsersCollection, uid)
+	user := new(models4userus.UserDto)
+	userKey := dal.NewKeyWithID(models4userus.UsersCollection, uid)
 	userRecord := dal.NewRecordWithData(userKey, user)
 
 	db := facade.GetDatabase(ctx)

@@ -17,22 +17,22 @@ func (v DwellingData) Validate() error {
 	return nil
 }
 
-var _ AssetMain = (*DwellingAssetMainDto)(nil)
+var _ AssetMain = (*AssetDtoDwelling)(nil)
 
-type DwellingAssetMainDto struct {
+type AssetDtoDwelling struct {
 	AssetMainDto
 	DwellingData
 }
 
-func (v *DwellingAssetMainDto) SpecificData() AssetSpecificData {
+func (v *AssetDtoDwelling) SpecificData() AssetSpecificData {
 	return &v.DwellingData
 }
 
-func (v *DwellingAssetMainDto) SetSpecificData(data AssetSpecificData) {
+func (v *AssetDtoDwelling) SetSpecificData(data AssetSpecificData) {
 	v.DwellingData = data.(DwellingData)
 }
 
-func (v *DwellingAssetMainDto) Validate() error {
+func (v *AssetDtoDwelling) Validate() error {
 	if err := v.AssetMainDto.Validate(); err != nil {
 		return err
 	}
@@ -46,18 +46,18 @@ var _ AssetDbData = (*DwellingAssetDbData)(nil)
 
 func NewDwellingAssetDbData() *DwellingAssetDbData {
 	return &DwellingAssetDbData{
-		DwellingAssetMainDto: new(DwellingAssetMainDto),
-		AssetExtraDto:        new(AssetExtraDto),
+		AssetDtoDwelling: new(AssetDtoDwelling),
+		AssetExtraDto:    new(AssetExtraDto),
 	}
 }
 
 type DwellingAssetDbData struct {
-	*DwellingAssetMainDto
+	*AssetDtoDwelling
 	*AssetExtraDto
 }
 
 func (v DwellingAssetDbData) Validate() error {
-	if err := v.DwellingAssetMainDto.Validate(); err != nil {
+	if err := v.AssetDtoDwelling.Validate(); err != nil {
 		return err
 	}
 	if err := v.AssetExtraDto.Validate(); err != nil {

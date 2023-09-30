@@ -2,10 +2,12 @@ package models4assetus
 
 import (
 	"github.com/sneat-co/sneat-core-modules/contactus/briefs4contactus"
-	dbmodels2 "github.com/sneat-co/sneat-go-core/models/dbmodels"
+	"github.com/sneat-co/sneat-go-core/models/dbmodels"
 	"github.com/sneat-co/sneat-go-core/validate"
 	"github.com/sneat-co/sneat-go-modules/assetus/briefs4assetus"
 )
+
+const TeamAssetsCollection = "assets"
 
 type AssetSpecificData interface {
 	Validate() error
@@ -24,6 +26,10 @@ type AssetCreationData interface {
 	SpecificData() AssetSpecificData
 }
 
+type AssetDto struct {
+	dbmodels.WithTags
+}
+
 // AssetDbData defines mandatory fields & methods on an asset record
 type AssetDbData interface {
 	AssetMain
@@ -35,9 +41,9 @@ type AssetDbData interface {
 type AssetMainDto struct {
 	briefs4assetus.AssetBrief
 	briefs4assetus.WithAssetusTeamBriefs[*briefs4assetus.AssetBrief]
-	dbmodels2.WithTags
+	dbmodels.WithTags
 	briefs4contactus.WithMultiTeamContactIDs
-	dbmodels2.WithCustomFields
+	dbmodels.WithCustomFields
 	AssetDates
 }
 
@@ -69,9 +75,9 @@ func (v *AssetMainDto) Validate() error {
 
 // AssetExtraDto defines extra fields on an asset record that are not passed in create asset request
 type AssetExtraDto struct {
-	dbmodels2.WithModified
-	dbmodels2.WithUserIDs
-	dbmodels2.WithTeamIDs
+	dbmodels.WithModified
+	dbmodels.WithUserIDs
+	dbmodels.WithTeamIDs
 }
 
 func (v *AssetExtraDto) AssetExtraData() *AssetExtraDto {

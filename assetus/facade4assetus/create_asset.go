@@ -7,7 +7,7 @@ import (
 	"github.com/sneat-co/sneat-core-modules/teamus/dal4teamus"
 	"github.com/sneat-co/sneat-core-modules/teamus/dto4teamus"
 	"github.com/sneat-co/sneat-go-core/facade"
-	dbmodels2 "github.com/sneat-co/sneat-go-core/models/dbmodels"
+	"github.com/sneat-co/sneat-go-core/models/dbmodels"
 	"github.com/sneat-co/sneat-go-modules/assetus/const4assetus"
 	"github.com/sneat-co/sneat-go-modules/assetus/dal4assetus"
 	"github.com/sneat-co/sneat-go-modules/assetus/models4assetus"
@@ -74,15 +74,15 @@ func createAssetTx(
 ) (
 	response CreateAssetResponse, err error,
 ) {
-	modified := dbmodels2.Modified{
+	modified := dbmodels.Modified{
 		By: params.UserID,
 		At: time.Now(),
 	}
 	response.ID = random.ID(7) // TODO: consider using incomplete key with options?
 	assetExtraData := request.DbData.AssetExtraData()
 	assetExtraData.UserIDs = []string{params.UserID}
-	assetExtraData.WithModified = dbmodels2.NewWithModified(modified.At, modified.By)
-	assetExtraData.WithTeamIDs = dbmodels2.WithSingleTeamID(request.TeamRequest.TeamID)
+	assetExtraData.WithModified = dbmodels.NewWithModified(modified.At, modified.By)
+	assetExtraData.WithTeamIDs = dbmodels.WithSingleTeamID(request.TeamRequest.TeamID)
 
 	//assetMainData := request.DbData.AssetMainDto()
 	//assetMainData.ContactIDs = []string{"*"} // Required value, TODO: use constant

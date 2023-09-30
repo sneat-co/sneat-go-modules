@@ -5,14 +5,14 @@ import (
 	"errors"
 	"fmt"
 	"github.com/dal-go/dalgo/dal"
-	"github.com/sneat-co/sneat-go-core/facade"
-	dbmodels2 "github.com/sneat-co/sneat-go-core/models/dbmodels"
 	"github.com/sneat-co/sneat-core-modules/contactus/dal4contactus"
 	"github.com/sneat-co/sneat-core-modules/memberus/briefs4memberus"
 	"github.com/sneat-co/sneat-core-modules/teamus/dal4teamus"
 	"github.com/sneat-co/sneat-core-modules/teamus/models4teamus"
 	"github.com/sneat-co/sneat-core-modules/userus/facade4userus"
-	models4userus2 "github.com/sneat-co/sneat-core-modules/userus/models4userus"
+	"github.com/sneat-co/sneat-core-modules/userus/models4userus"
+	"github.com/sneat-co/sneat-go-core/facade"
+	"github.com/sneat-co/sneat-go-core/models/dbmodels"
 	"github.com/sneat-co/sneat-go-modules/meetingus/models4meetingus"
 	"github.com/sneat-co/sneat-go-modules/retrospectus/dal4retrospectus"
 	"github.com/sneat-co/sneat-go-modules/retrospectus/models4retrospectus"
@@ -80,7 +80,7 @@ func StartRetrospective(ctx context.Context, userContext facade.User, request St
 				return fmt.Errorf("an attempt to start a new retrospective while another one in progress (new: %v, active: %v)", request.MeetingID, activeRetrospective.ID)
 			}
 
-			byUser := dbmodels2.ByUser{UID: uid}
+			byUser := dbmodels.ByUser{UID: uid}
 			timer := models4meetingus.Timer{
 				By:     byUser,
 				At:     params.Started,
@@ -137,7 +137,7 @@ func StartRetrospective(ctx context.Context, userContext facade.User, request St
 					TimeLastAction: &params.Started,
 					Meeting: models4meetingus.Meeting{
 						Version: 1,
-						WithUserIDs: dbmodels2.WithUserIDs{
+						WithUserIDs: dbmodels.WithUserIDs{
 							UserIDs: team.Data.UserIDs,
 						},
 						Timer: &timer,
@@ -219,11 +219,11 @@ func getUsersWithRetroItems(ctx context.Context, tx dal.ReadwriteTransaction, te
 	for userID := range retroTeam.Data.UpcomingRetro.ItemsByUserAndType {
 		userIDs = append(userIDs, userID)
 	}
-	userKeys := models4userus2.NewUserKeys(userIDs)
+	userKeys := models4userus.NewUserKeys(userIDs)
 	var usersRecords []dal.Record // []*models4userus.UserDto
-	users := make([]*models4userus2.UserDto, len(userKeys))
+	users := make([]*models4userus.UserDto, len(userKeys))
 	for i, userKey := range userKeys {
-		users[i] = new(models4userus2.UserDto)
+		users[i] = new(models4userus.UserDto)
 		usersRecords[i] = dal.NewRecordWithData(userKey, users)
 	}
 	err = facade4userus.TxGetUsers(ctx, tx, usersRecords)

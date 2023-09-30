@@ -137,24 +137,24 @@ func (v *VehicleAssetMainData) Validate() error {
 	return nil
 }
 
-var _ AssetDbData = (*VehicleAssetDbData)(nil)
+var _ AssetDbData = (*AssetDtoVehicle)(nil)
 
-// VehicleAssetDbData is a DB DTO
-type VehicleAssetDbData struct {
-	*VehicleAssetMainData
-	*AssetExtraDto
+// AssetDtoVehicle is a DB DTO
+type AssetDtoVehicle struct {
+	VehicleAssetMainData
+	AssetExtraDto
 }
 
-// NewVehicleAssetDbData creates new VehicleAssetDbData
-func NewVehicleAssetDbData() *VehicleAssetDbData {
-	return &VehicleAssetDbData{
-		VehicleAssetMainData: new(VehicleAssetMainData),
-		AssetExtraDto:        new(AssetExtraDto),
+// NewVehicleAssetDbData creates new AssetDtoVehicle
+func NewVehicleAssetDbData() *AssetDtoVehicle {
+	return &AssetDtoVehicle{
+		//VehicleAssetMainData: new(VehicleAssetMainData),
+		//AssetExtraDto:        new(AssetExtraDto),
 	}
 }
 
 // Validate returns error if not valid
-func (v *VehicleAssetDbData) Validate() error {
+func (v *AssetDtoVehicle) Validate() error {
 	if err := v.VehicleAssetMainData.Validate(); err != nil {
 		return err
 	}

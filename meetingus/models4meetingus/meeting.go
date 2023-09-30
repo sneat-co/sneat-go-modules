@@ -2,10 +2,10 @@ package models4meetingus
 
 import (
 	"fmt"
-	"github.com/sneat-co/sneat-go-core"
-	dbmodels2 "github.com/sneat-co/sneat-go-core/models/dbmodels"
 	"github.com/sneat-co/sneat-core-modules/contactus/briefs4contactus"
 	"github.com/sneat-co/sneat-core-modules/memberus/briefs4memberus"
+	"github.com/sneat-co/sneat-go-core"
+	"github.com/sneat-co/sneat-go-core/models/dbmodels"
 	"github.com/strongo/slice"
 	"github.com/strongo/validation"
 	"time"
@@ -15,8 +15,8 @@ var _ core.Validatable = (*Meeting)(nil)
 
 // Excluded record
 type Excluded struct {
-	By     dbmodels2.ByUser `json:"by,omitempty" firestore:"by,omitempty"`
-	Reason string           `json:"reason,omitempty" firestore:"reason,omitempty"`
+	By     dbmodels.ByUser `json:"by,omitempty" firestore:"by,omitempty"`
+	Reason string          `json:"reason,omitempty" firestore:"reason,omitempty"`
 }
 
 // Validate validates record
@@ -62,7 +62,7 @@ var _ MeetingInstance = (*Meeting)(nil)
 
 // Meeting record
 type Meeting struct {
-	dbmodels2.WithUserIDs
+	dbmodels.WithUserIDs
 	briefs4contactus.WithMultiTeamContacts[*MeetingMemberBrief]
 	Version  int        `json:"v" firestore:"v"`
 	Started  *time.Time `json:"started,omitempty" firestore:"started,omitempty"`
