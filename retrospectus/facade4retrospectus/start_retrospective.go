@@ -5,8 +5,8 @@ import (
 	"errors"
 	"fmt"
 	"github.com/dal-go/dalgo/dal"
+	"github.com/sneat-co/sneat-core-modules/contactus/const4contactus"
 	"github.com/sneat-co/sneat-core-modules/contactus/dal4contactus"
-	"github.com/sneat-co/sneat-core-modules/memberus/briefs4memberus"
 	"github.com/sneat-co/sneat-core-modules/teamus/dal4teamus"
 	"github.com/sneat-co/sneat-core-modules/teamus/models4teamus"
 	"github.com/sneat-co/sneat-core-modules/userus/facade4userus"
@@ -30,17 +30,17 @@ func StartRetrospective(ctx context.Context, userContext facade.User, request St
 		func(ctx context.Context, tx dal.ReadwriteTransaction, params *dal4contactus.ContactusTeamWorkerParams) (err error) {
 			team := params.Team
 
-			if err := tx.GetMulti(ctx, []dal.Record{params.Team.Record, params.ContactusTeam.Record}); err != nil {
+			if err := tx.GetMulti(ctx, []dal.Record{params.Team.Record, params.TeamModuleEntry.Record}); err != nil {
 				return err
 			}
 
 			if !params.Team.Data.HasUserID(uid) {
 				return errors.New("current user does not belong to team (uid is missing in team.userIDs)")
 			}
-			if !params.ContactusTeam.Data.HasUserID(uid) {
+			if !params.TeamModuleEntry.Data.HasUserID(uid) {
 				return errors.New("current user does not belong to team (uid is missing in contactusTeam.userIDs)")
 			}
-			if _, b := params.ContactusTeam.Data.GetContactBriefByUserID(uid); b == nil {
+			if _, b := params.TeamModuleEntry.Data.GetContactBriefByUserID(uid); b == nil {
 				return errors.New("current user does not have contact brief in contactusTeam.Data.Contacts")
 			}
 
@@ -146,7 +146,7 @@ func StartRetrospective(ctx context.Context, userContext facade.User, request St
 						MaxVotesPerUser: models4retrospectus.DefaultMaxVotesPerUser,
 					},
 				}
-				for contactID, contact := range params.ContactusTeam.Data.GetContactBriefsByRoles(briefs4memberus.TeamMemberRoleTeamMember) {
+				for contactID, contact := range params.TeamModuleEntry.Data.GetContactBriefsByRoles(const4contactus.TeamMemberRoleMember) {
 					retrospective.AddContact(team.ID, contactID, &models4meetingus.MeetingMemberBrief{
 						ContactBrief: *contact,
 					})

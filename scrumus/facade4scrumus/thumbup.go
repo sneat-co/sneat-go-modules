@@ -31,11 +31,11 @@ func ThumbUp(ctx context.Context, userContext facade.User, request ThumbUpReques
 
 	return runTaskWorker(ctx, userContext, request.TaskRequest,
 		func(ctx context.Context, tx dal.ReadwriteTransaction, params taskWorkerParams) (err error) {
-			if err = tx.Get(ctx, params.ContactusTeam.Record); err != nil {
+			if err = tx.Get(ctx, params.TeamModuleEntry.Record); err != nil {
 				return err
 			}
 			var userContactID string
-			for id, member := range params.ContactusTeam.Data.Contacts {
+			for id, member := range params.TeamModuleEntry.Data.Contacts {
 				if member.UserID == uid {
 					userContactID = id
 				}

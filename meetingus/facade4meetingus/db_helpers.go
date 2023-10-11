@@ -4,17 +4,16 @@ import (
 	"context"
 	"fmt"
 	"github.com/dal-go/dalgo/dal"
-	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-core-modules/contactus/dal4contactus"
-	"github.com/sneat-co/sneat-core-modules/memberus/briefs4memberus"
 	"github.com/sneat-co/sneat-core-modules/teamus/models4teamus"
+	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-go-modules/meetingus/models4meetingus"
 	"github.com/strongo/validation"
 )
 
 // WorkerParams parameters
 type WorkerParams struct {
-	dal4contactus.ContactusTeamWorkerParams
+	*dal4contactus.ContactusTeamWorkerParams
 	Meeting WorkerMeeting
 }
 
@@ -73,8 +72,7 @@ func RunMeetingWorker(ctx context.Context, userID string, request Request, recor
 
 // GetMeetingAndTeam retrieve api4meetingus and team records
 var GetMeetingAndTeam = func(ctx context.Context, tx dal.ReadwriteTransaction, uid, teamID, meetingID string, recordFactory RecordFactory) (params WorkerParams, err error) {
-	params.UserID = uid
-	params.ContactusTeamWorkerParams = *dal4contactus.NewContactusTeamWorkerParams(uid, teamID)
+	params.ContactusTeamWorkerParams = dal4contactus.NewContactusTeamWorkerParams(uid, teamID)
 	// Create team parameter
 	// Create api4meetingus parameter
 	meetingKey := dal.NewKeyWithParentAndID(params.Team.Key, recordFactory.Collection(), meetingID)
@@ -126,7 +124,7 @@ var GetMeetingAndTeam = func(ctx context.Context, tx dal.ReadwriteTransaction, u
 		}
 		meeting.UserIDs = team.UserIDs
 		for contactID, teamMember := range contactusTeam.Data.Contacts {
-			if teamMember.HasRole(briefs4memberus.TeamMemberRoleTeamMember) {
+			if teamMember.IsTeamMember() {
 				meeting.AddContact(teamID, contactID, &models4meetingus.MeetingMemberBrief{ContactBrief: *teamMember})
 			}
 		}

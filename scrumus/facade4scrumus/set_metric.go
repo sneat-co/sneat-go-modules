@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 	"github.com/dal-go/dalgo/dal"
-	"github.com/sneat-co/sneat-go-core/facade"
+	"github.com/sneat-co/sneat-core-modules/contactus/briefs4contactus"
 	"github.com/sneat-co/sneat-core-modules/contactus/models4contactus"
-	"github.com/sneat-co/sneat-core-modules/memberus/briefs4memberus"
 	"github.com/sneat-co/sneat-core-modules/teamus/models4teamus"
+	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-go-modules/meetingus/facade4meetingus"
 	"github.com/sneat-co/sneat-go-modules/scrumus/models4scrumus"
 	"github.com/strongo/validation"
@@ -45,7 +45,7 @@ func SetMetric(ctx context.Context, userContext facade.User, request SetMetricRe
 					return
 				}
 			case "personal":
-				if scrumUpdates, err = setPersonalMetric(p, params.ContactusTeam.Data); err != nil {
+				if scrumUpdates, err = setPersonalMetric(p, params.TeamModuleEntry.Data); err != nil {
 					return
 				}
 			default:
@@ -70,7 +70,7 @@ type setMetricParams struct {
 
 func setPersonalMetric(p setMetricParams, contactusTeam *models4contactus.ContactusTeamDto) (scrumUpdates []dal.Update, err error) {
 	var status *models4scrumus.MemberStatus
-	var teamMember *briefs4memberus.MemberBrief
+	var teamMember *briefs4contactus.ContactBrief
 	var teamMemberContactID string
 	for contactID, contact := range contactusTeam.Contacts {
 		if contactID == p.request.Member {

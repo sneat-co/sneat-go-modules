@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/dal-go/dalgo/dal"
-	"github.com/sneat-co/sneat-core-modules/memberus/briefs4memberus"
+	"github.com/sneat-co/sneat-core-modules/contactus/const4contactus"
 	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-go-modules/meetingus/facade4meetingus"
 	"github.com/sneat-co/sneat-go-modules/retrospectus/models4retrospectus"
@@ -53,7 +53,7 @@ func moveRetroItemsFromUsers(ctx context.Context, tx dal.ReadwriteTransaction, p
 	//wg := sync.WaitGroup{}
 	userRetroRecords := make([]dal.Record, len(retrospective.Contacts))
 	for _, member := range retrospective.Contacts {
-		if member.UserID != "" && member.HasRole(briefs4memberus.TeamMemberRoleContributor) {
+		if member.UserID != "" && member.HasRole(const4contactus.TeamMemberRoleContributor) {
 			userRetroRecords = append(userRetroRecords, getUserRetroRecord(member.UserID, params.Team.ID, new(models4retrospectus.Retrospective)))
 		}
 		//}

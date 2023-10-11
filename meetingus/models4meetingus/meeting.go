@@ -3,7 +3,7 @@ package models4meetingus
 import (
 	"fmt"
 	"github.com/sneat-co/sneat-core-modules/contactus/briefs4contactus"
-	"github.com/sneat-co/sneat-core-modules/memberus/briefs4memberus"
+	"github.com/sneat-co/sneat-core-modules/contactus/const4contactus"
 	"github.com/sneat-co/sneat-go-core"
 	"github.com/sneat-co/sneat-go-core/models/dbmodels"
 	"github.com/strongo/slice"
@@ -128,9 +128,9 @@ func (v *Meeting) validateUserIDs() error {
 		for _, m := range v.Contacts {
 			if m.UserID == uid {
 				return memberRoles{
-					isParticipant: m.HasRole(briefs4memberus.TeamMemberRoleContributor),
-					isSpectator:   m.HasRole(briefs4memberus.TeamMemberRoleSpectator),
-					isExcluded:    m.HasRole(briefs4memberus.TeamMemberRoleExcluded),
+					isParticipant: m.HasRole(const4contactus.TeamMemberRoleContributor),
+					isSpectator:   m.HasRole(const4contactus.TeamMemberRoleSpectator),
+					isExcluded:    m.HasRole(const4contactus.TeamMemberRoleExcluded),
 					roles:         m.Roles,
 				}
 			}

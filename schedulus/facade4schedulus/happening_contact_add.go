@@ -23,7 +23,7 @@ func AddContactToHappening(ctx context.Context, userID string, request dto4sched
 
 	var worker = func(ctx context.Context, tx dal.ReadwriteTransaction, params happeningWorkerParams) (err error) {
 
-		if err = tx.GetMulti(ctx, []dal.Record{params.ContactusTeam.Record, params.SchedulusTeam.Record}); err != nil {
+		if err = tx.GetMulti(ctx, []dal.Record{params.TeamModuleEntry.Record, params.SchedulusTeam.Record}); err != nil {
 			return fmt.Errorf("failed to get records: %w", err)
 		}
 
@@ -31,7 +31,7 @@ func AddContactToHappening(ctx context.Context, userID string, request dto4sched
 			return
 		}
 
-		if !params.ContactusTeam.Data.HasContact(request.ContactID) {
+		if !params.TeamModuleEntry.Data.HasContact(request.ContactID) {
 			return validation.NewErrBadRequestFieldValue("teamContactID", "unknown member ContactID")
 		}
 
