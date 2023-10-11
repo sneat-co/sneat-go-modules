@@ -27,6 +27,9 @@ func CreateListItems(ctx context.Context, userContext facade.User, request Creat
 }
 
 func createListItemTxWorker(ctx context.Context, request CreateListItemsRequest, uid string, tx dal.ReadwriteTransaction, params *dal4teamus.ModuleTeamWorkerParams[*models4listus.ListusTeamDto]) (err error) {
+	if err = params.GetRecords(ctx, tx, uid); err != nil {
+		return err
+	}
 	if slice.Index(params.Team.Data.UserIDs, uid) < 0 {
 		// TODO: check if user is a member of the team at RunModuleTeamWorker() level
 		return fmt.Errorf("user have no access to this team")
