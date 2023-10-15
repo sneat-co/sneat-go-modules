@@ -32,7 +32,7 @@ func CreateHappening(
 		counter = "recurringHappenings"
 	}
 	happeningDto := &models4schedulus.HappeningDto{
-		HappeningBase: *request.Happening,
+		HappeningBrief: *request.Happening,
 		WithTeamDates: dbmodels.WithTeamDates{
 			WithTeamIDs: dbmodels.WithTeamIDs{
 				TeamIDs: []string{request.TeamID},
@@ -85,14 +85,12 @@ func CreateHappening(
 				return fmt.Errorf("failed to insert new happening record: %w", err)
 			}
 			if happeningDto.Type == models4schedulus.HappeningTypeRecurring {
-				brief := &models4schedulus.HappeningBrief{
-					HappeningBase: happeningDto.HappeningBase,
-				}
+				brief := &happeningDto.HappeningBrief
 				if params.TeamModuleEntry.Data.RecurringHappenings == nil {
 					params.TeamModuleEntry.Data.RecurringHappenings = make(map[string]*models4schedulus.HappeningBrief)
 				}
 				params.TeamModuleEntry.Data.RecurringHappenings[happeningID] = brief
-				params.TeamUpdates = append(params.TeamUpdates, dal.Update{
+				params.TeamModuleUpdates = append(params.TeamUpdates, dal.Update{
 					Field: "recurringHappenings." + happeningID,
 					Value: brief,
 				})

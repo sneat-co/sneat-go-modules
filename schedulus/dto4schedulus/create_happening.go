@@ -10,7 +10,7 @@ import (
 // CreateHappeningRequest DTO
 type CreateHappeningRequest struct {
 	dto4teamus.TeamRequest
-	Happening *models4schedulus.HappeningBase `json:"happening"`
+	Happening *models4schedulus.HappeningBrief `json:"happening"`
 }
 
 // Validate returns error if not valid

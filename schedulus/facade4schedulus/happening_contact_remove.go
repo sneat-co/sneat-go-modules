@@ -68,11 +68,9 @@ func removeContactFromHappeningBriefInTeamDto(
 ) (err error) {
 	happeningBrief := schedulusTeam.Data.GetRecurringHappeningBrief(happeningID)
 	if happeningBrief == nil {
-		schedulusTeam.Data.RecurringHappenings[happeningID] = &models4schedulus.HappeningBrief{
-			HappeningBase: happeningDto.HappeningBase,
-		}
-	} else if happeningBrief.HasTeamContactID(teamContactID) {
-		happeningBrief.ContactIDs = happeningDto.ContactIDs
+		schedulusTeam.Data.RecurringHappenings[happeningID] = &happeningDto.HappeningBrief
+	} else if happeningBrief.Participants[string(teamContactID)] != nil {
+		happeningBrief.Participants[string(teamContactID)] = new(models4schedulus.HappeningParticipant)
 	} else {
 		return nil
 	}

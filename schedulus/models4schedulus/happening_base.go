@@ -6,8 +6,8 @@ import (
 	"github.com/strongo/validation"
 )
 
-// HappeningBase hold data that stored both in entity record and in a brief.
-type HappeningBase struct {
+// HappeningBrief hold data that stored both in entity record and in a brief.
+type HappeningBrief struct {
 	Type     HappeningType    `json:"type" firestore:"type"`
 	Status   string           `json:"status" firestore:"status"`
 	Canceled *Canceled        `json:"canceled,omitempty" firestore:"canceled,omitempty"`
@@ -16,11 +16,10 @@ type HappeningBase struct {
 	Slots    []*HappeningSlot `json:"slots,omitempty" firestore:"slots,omitempty"`
 
 	Participants map[string]*HappeningParticipant `json:"participants,omitempty" firestore:"participants,omitempty"`
-
-	dbmodels.WithMultiTeamAssetIDs // TODO: should be part of HappeningBrief
+	Assets       map[string]*HappeningAsset       `json:"places,omitempty" firestore:"places,omitempty"`
 }
 
-func (v HappeningBase) GetSlot(id string) (i int, slot *HappeningSlot) {
+func (v HappeningBrief) GetSlot(id string) (i int, slot *HappeningSlot) {
 	for i, slot = range v.Slots {
 		if slot.ID == id {
 			return
@@ -30,7 +29,7 @@ func (v HappeningBase) GetSlot(id string) (i int, slot *HappeningSlot) {
 }
 
 // Validate returns error if not valid
-func (v HappeningBase) Validate() error {
+func (v HappeningBrief) Validate() error {
 	switch v.Type {
 	case HappeningTypeSingle, HappeningTypeRecurring:
 		break
@@ -55,9 +54,6 @@ func (v HappeningBase) Validate() error {
 	if err := dbmodels.ValidateTitle(v.Title); err != nil {
 		return err
 	}
-	if err := v.WithMultiTeamAssetIDs.Validate(); err != nil {
-		return err
-	}
 	if len(v.Slots) == 0 {
 		return validation.NewErrRecordIsMissingRequiredField("slots")
 	}
@@ -80,6 +76,15 @@ func (v HappeningBase) Validate() error {
 		}
 		if err := participant.Validate(); err != nil {
 			return validation.NewErrBadRecordFieldValue("participants."+contactID, err.Error())
+		}
+	}
+
+	for assetID, assetBrief := range v.Assets {
+		if assetID == "" {
+			return validation.NewErrBadRecordFieldValue("assets", "assetID is empty")
+		}
+		if err := assetBrief.Validate(); err != nil {
+			return validation.NewErrBadRecordFieldValue("assets."+assetID, err.Error())
 		}
 	}
 	return nil

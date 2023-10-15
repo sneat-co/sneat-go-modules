@@ -10,7 +10,7 @@ import (
 
 // HappeningDto DTO
 type HappeningDto struct {
-	HappeningBase
+	HappeningBrief
 	dbmodels.WithTags
 	dbmodels.WithUserIDs
 	dbmodels.WithTeamDates
@@ -19,7 +19,7 @@ type HappeningDto struct {
 
 // Validate returns error if not valid
 func (v *HappeningDto) Validate() error {
-	if err := v.HappeningBase.Validate(); err != nil {
+	if err := v.HappeningBrief.Validate(); err != nil {
 		return err
 	}
 	if err := v.WithUserIDs.Validate(); err != nil {

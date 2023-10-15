@@ -70,15 +70,13 @@ func addContactToHappeningBriefInTeamDto(
 ) (err error) {
 	happeningBrief := schedulusTeam.Data.GetRecurringHappeningBrief(happeningID)
 	teamContactID := dbmodels.NewTeamItemID(schedulusTeam.ID, contactID)
-	if happeningBrief != nil && happeningBrief.HasTeamContactID(teamContactID) {
+	if happeningBrief != nil && happeningBrief.Participants[string(teamContactID)] != nil {
 		return nil // Already added to happening brief in schedulusTeam record
 	}
-	happeningBrief = &models4schedulus.HappeningBrief{
-		HappeningBase: happeningDto.HappeningBase,
-	}
+	happeningBrief = &happeningDto.HappeningBrief
 	// We have to check again as DTO can have member ContactID while brief does not.
-	if !happeningBrief.HasTeamContactID(teamContactID) {
-		happeningBrief.AddTeamContactID(teamContactID)
+	if happeningBrief.Participants[string(teamContactID)] == nil {
+		happeningBrief.Participants[string(teamContactID)] = &models4schedulus.HappeningParticipant{}
 	}
 	schedulusTeam.Data.RecurringHappenings[happeningID] = happeningBrief
 	teamUpdates := []dal.Update{
