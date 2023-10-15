@@ -1,7 +1,6 @@
 package models4schedulus
 
 import (
-	"fmt"
 	"github.com/dal-go/dalgo/dal"
 )
 
@@ -25,19 +24,6 @@ const (
 	// HappeningTypeSingle = "single"
 	HappeningTypeSingle HappeningType = "single"
 )
-
-// CreateHappeningDto a DTO object
-type CreateHappeningDto struct {
-	HappeningBase
-}
-
-// Validate returns error if not valid
-func (v CreateHappeningDto) Validate() error {
-	if err := v.HappeningBase.Validate(); err != nil {
-		return fmt.Errorf("failed validation of HappeningBase: %w", err)
-	}
-	return nil
-}
 
 const (
 	HappeningStatusActive   = "active"

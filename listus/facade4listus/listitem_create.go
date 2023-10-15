@@ -30,10 +30,10 @@ func createListItemTxWorker(ctx context.Context, request CreateListItemsRequest,
 	if err = params.GetRecords(ctx, tx, uid); err != nil {
 		return err
 	}
-	if slice.Index(params.Team.Data.UserIDs, uid) < 0 {
-		// TODO: check if user is a member of the team at RunModuleTeamWorker() level
-		return fmt.Errorf("user have no access to this team")
-	}
+	//if slice.Index(params.Team.Data.UserIDs, uid) < 0 {
+	//	// TODO: check if user is a member of the team at RunModuleTeamWorker() level
+	//	return fmt.Errorf("user have no access to this team")
+	//}
 
 	listID := models4listus.GetFullListID(request.ListType, request.ListID)
 	listKey := dal4listus.NewTeamListKey(request.TeamID, listID)

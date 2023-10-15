@@ -8,15 +8,13 @@ import (
 	"net/http"
 )
 
-var removeMemberFromHappening = facade4schedulus.RemoveMemberFromHappening
-
-func httpRemoveMemberFromHappening(w http.ResponseWriter, r *http.Request) {
+func httpRemoveParticipantFromHappening(w http.ResponseWriter, r *http.Request) {
 	var request dto4schedulus.HappeningContactRequest
 	request.HappeningRequest = getHappeningRequestParamsFromURL(r)
 	ctx, userContext, err := apicore.VerifyAuthenticatedRequestAndDecodeBody(w, r, verify.DefaultJsonWithAuthRequired, &request)
 	if err != nil {
 		return
 	}
-	err = removeMemberFromHappening(ctx, userContext.GetID(), request)
+	err = facade4schedulus.RemoveParticipantFromHappening(ctx, userContext.GetID(), request)
 	apicore.ReturnJSON(ctx, w, r, http.StatusOK, err, nil)
 }

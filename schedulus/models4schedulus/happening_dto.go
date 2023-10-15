@@ -34,9 +34,6 @@ func (v *HappeningDto) Validate() error {
 	if len(v.TeamIDs) == 0 {
 		return validation.NewErrRecordIsMissingRequiredField("teamIDs")
 	}
-	if err := v.WithMultiTeamContacts.Validate(); err != nil {
-		return err
-	}
 	for i, level := range v.Levels {
 		if l := strings.TrimSpace(level); l == "" {
 			return validation.NewErrRecordIsMissingRequiredField(
@@ -51,19 +48,6 @@ func (v *HappeningDto) Validate() error {
 	}
 	if err := v.WithMultiTeamContactIDs.Validate(); err != nil {
 		return err
-	}
-	for i, teamContactID := range v.ContactIDs {
-		ids := strings.Split(string(teamContactID), ":")
-		if len(ids) != 2 {
-			return validation.NewErrBadRecordFieldValue(fmt.Sprintf("contactIDs[%v]", i), fmt.Sprintf("expected to have an id in '{TEAM_ID}:{CONTACT_ID}' format, got: '%v'", teamContactID))
-		}
-		teamID, contactID := ids[0], ids[1]
-		if teamID == "" {
-			return validation.NewErrBadRecordFieldValue(fmt.Sprintf("contactIDs[%v]", i), fmt.Sprintf("missing TEAM_ID part in '{TEAM_ID}:{CONTACT_ID}' format, got: '%v'", teamContactID))
-		}
-		if contactID == "" {
-			return validation.NewErrBadRecordFieldValue(fmt.Sprintf("contactIDs[%v]", i), fmt.Sprintf("missing CONTACT_ID part in  '{TEAM_ID}:{CONTACT_ID}' format, got: '%v'", teamContactID))
-		}
 	}
 	switch v.Type {
 	case "":

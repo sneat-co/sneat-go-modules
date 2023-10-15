@@ -4,24 +4,24 @@ import (
 	"context"
 	"fmt"
 	"github.com/dal-go/dalgo/dal"
-	"github.com/sneat-co/sneat-go-core/models/dbmodels"
 	"github.com/sneat-co/sneat-core-modules/teamus/dal4teamus"
+	"github.com/sneat-co/sneat-go-core/models/dbmodels"
 	"github.com/sneat-co/sneat-go-modules/schedulus/dal4schedulus"
 	"github.com/sneat-co/sneat-go-modules/schedulus/dto4schedulus"
 	"github.com/sneat-co/sneat-go-modules/schedulus/models4schedulus"
 	"github.com/strongo/validation"
 )
 
-func RemoveMemberFromHappening(ctx context.Context, userID string, request dto4schedulus.HappeningContactRequest) (err error) {
+func RemoveParticipantFromHappening(ctx context.Context, userID string, request dto4schedulus.HappeningContactRequest) (err error) {
 	if err = request.Validate(); err != nil {
 		return
 	}
 
 	var worker = func(ctx context.Context, tx dal.ReadwriteTransaction, params happeningWorkerParams) (err error) {
 		teamContactID := dbmodels.NewTeamItemID(request.TeamID, request.ContactID)
-		contactIDs := make([]dbmodels.TeamItemID, 0, len(params.Happening.Dto.ContactIDs))
+		contactIDs := make([]string, 0, len(params.Happening.Dto.ContactIDs))
 		for _, id := range params.Happening.Dto.ContactIDs {
-			if id != teamContactID {
+			if id != string(teamContactID) {
 				contactIDs = append(contactIDs, id)
 			}
 		}
@@ -69,7 +69,6 @@ func removeContactFromHappeningBriefInTeamDto(
 	happeningBrief := schedulusTeam.Data.GetRecurringHappeningBrief(happeningID)
 	if happeningBrief == nil {
 		schedulusTeam.Data.RecurringHappenings[happeningID] = &models4schedulus.HappeningBrief{
-			ID:            happeningID,
 			HappeningBase: happeningDto.HappeningBase,
 		}
 	} else if happeningBrief.HasTeamContactID(teamContactID) {
@@ -79,8 +78,8 @@ func removeContactFromHappeningBriefInTeamDto(
 	}
 	teamUpdates := []dal.Update{
 		{
-			Field: "recurringHappenings",
-			Value: schedulusTeam.Data.RecurringHappenings,
+			Field: "recurringHappenings." + happeningID,
+			Value: happeningBrief,
 		},
 	}
 	if err = tx.Update(ctx, schedulusTeam.Key, teamUpdates); err != nil {

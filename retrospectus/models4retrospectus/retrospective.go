@@ -354,7 +354,7 @@ func (v *Retrospective) Validate() error {
 	for memberID, counts := range v.CountsByMemberAndType {
 		var member *models4meetingus.MeetingMemberBrief
 		for id /*, m*/ := range v.Contacts {
-			if id.ItemID() == memberID {
+			if dbmodels.TeamItemID(id).ItemID() == memberID {
 				//member = m
 				panic("TODO: add team ID validation") // TODO: add team ID validation
 			}

@@ -14,7 +14,10 @@ type HappeningBase struct {
 	Title    string           `json:"title" firestore:"title"`
 	Levels   []string         `json:"levels,omitempty" firestore:"levels,omitempty"`
 	Slots    []*HappeningSlot `json:"slots,omitempty" firestore:"slots,omitempty"`
-	dbmodels.WithMultiTeamAssetIDs
+
+	Participants map[string]*HappeningParticipant `json:"participants,omitempty" firestore:"participants,omitempty"`
+
+	dbmodels.WithMultiTeamAssetIDs // TODO: should be part of HappeningBrief
 }
 
 func (v HappeningBase) GetSlot(id string) (i int, slot *HappeningSlot) {
@@ -68,6 +71,15 @@ func (v HappeningBase) Validate() error {
 				return validation.NewErrBadRecordFieldValue("slots", fmt.Sprintf("at least 2 slots have same ContactID at indexes: %v & %v", i, j))
 			}
 			// TODO: Add more validations?
+		}
+	}
+
+	for contactID, participant := range v.Participants {
+		if contactID == "" {
+			return validation.NewErrBadRecordFieldValue("participants", "contactID is empty")
+		}
+		if err := participant.Validate(); err != nil {
+			return validation.NewErrBadRecordFieldValue("participants."+contactID, err.Error())
 		}
 	}
 	return nil

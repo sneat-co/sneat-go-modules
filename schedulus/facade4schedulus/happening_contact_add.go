@@ -12,7 +12,7 @@ import (
 	"github.com/strongo/validation"
 )
 
-func AddContactToHappening(ctx context.Context, userID string, request dto4schedulus.HappeningContactRequest) (err error) {
+func AddParticipantToHappening(ctx context.Context, userID string, request dto4schedulus.HappeningContactRequest) (err error) {
 	if err = request.Validate(); err != nil {
 		return
 	}
@@ -74,10 +74,8 @@ func addContactToHappeningBriefInTeamDto(
 		return nil // Already added to happening brief in schedulusTeam record
 	}
 	happeningBrief = &models4schedulus.HappeningBrief{
-		ID:            happeningID,
 		HappeningBase: happeningDto.HappeningBase,
 	}
-
 	// We have to check again as DTO can have member ContactID while brief does not.
 	if !happeningBrief.HasTeamContactID(teamContactID) {
 		happeningBrief.AddTeamContactID(teamContactID)
@@ -85,8 +83,8 @@ func addContactToHappeningBriefInTeamDto(
 	schedulusTeam.Data.RecurringHappenings[happeningID] = happeningBrief
 	teamUpdates := []dal.Update{
 		{
-			Field: "recurringHappenings",
-			Value: schedulusTeam.Data.RecurringHappenings,
+			Field: "recurringHappenings." + happeningID,
+			Value: happeningBrief,
 		},
 	}
 	if err = tx.Update(ctx, schedulusTeam.Key, teamUpdates); err != nil {

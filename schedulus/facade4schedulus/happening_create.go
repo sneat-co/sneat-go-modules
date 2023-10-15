@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/dal-go/dalgo/dal"
+	"github.com/sneat-co/sneat-core-modules/contactus/dal4contactus"
 	"github.com/sneat-co/sneat-core-modules/teamus/dal4teamus"
 	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-go-core/models/dbmodels"
@@ -22,16 +23,16 @@ func CreateHappening(
 ) (
 	response dto4schedulus.CreateHappeningResponse, err error,
 ) {
-	request.Dto.Title = strings.TrimSpace(request.Dto.Title)
+	request.Happening.Title = strings.TrimSpace(request.Happening.Title)
 	if err = request.Validate(); err != nil {
 		return
 	}
 	var counter string
-	if request.Dto.Type == models4schedulus.HappeningTypeRecurring {
+	if request.Happening.Type == models4schedulus.HappeningTypeRecurring {
 		counter = "recurringHappenings"
 	}
 	happeningDto := &models4schedulus.HappeningDto{
-		HappeningBase: request.Dto.HappeningBase,
+		HappeningBase: *request.Happening,
 		WithTeamDates: dbmodels.WithTeamDates{
 			WithTeamIDs: dbmodels.WithTeamIDs{
 				TeamIDs: []string{request.TeamID},
@@ -50,8 +51,9 @@ func CreateHappening(
 		const4schedulus.ModuleID,
 		new(models4schedulus.SchedulusTeamDto),
 		func(ctx context.Context, tx dal.ReadwriteTransaction, params *dal4teamus.ModuleTeamWorkerParams[*models4schedulus.SchedulusTeamDto]) (err error) {
-			if !params.Team.Data.HasUserID(params.UserID) {
-				return errors.New("current user does not have access to this team")
+			contactusTeam := dal4contactus.NewContactusTeamModuleEntry(params.Team.ID)
+			if err = params.GetRecords(ctx, tx, params.UserID, contactusTeam.Record); err != nil {
+				return err
 			}
 
 			happeningDto.UserIDs = params.Team.Data.UserIDs
@@ -61,6 +63,11 @@ func CreateHappening(
 				happeningDto.Dates = []string{date}
 				happeningDto.DateMin = date
 				happeningDto.DateMax = date
+			}
+
+			for contactID := range happeningDto.Participants {
+				contactBrief := contactusTeam.Data.Contacts[contactID]
+				happeningDto.AddContact(params.Team.ID, contactID, contactBrief)
 			}
 
 			var happeningID string
@@ -79,13 +86,15 @@ func CreateHappening(
 			}
 			if happeningDto.Type == models4schedulus.HappeningTypeRecurring {
 				brief := &models4schedulus.HappeningBrief{
-					ID:            happeningID,
 					HappeningBase: happeningDto.HappeningBase,
+				}
+				if params.TeamModuleEntry.Data.RecurringHappenings == nil {
+					params.TeamModuleEntry.Data.RecurringHappenings = make(map[string]*models4schedulus.HappeningBrief)
 				}
 				params.TeamModuleEntry.Data.RecurringHappenings[happeningID] = brief
 				params.TeamUpdates = append(params.TeamUpdates, dal.Update{
-					Field: "recurringHappenings",
-					Value: params.TeamModuleEntry.Data.RecurringHappenings,
+					Field: "recurringHappenings." + happeningID,
+					Value: brief,
 				})
 			}
 			return nil

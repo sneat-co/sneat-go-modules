@@ -10,7 +10,7 @@ import (
 // CreateHappeningRequest DTO
 type CreateHappeningRequest struct {
 	dto4teamus.TeamRequest
-	Dto *models4schedulus.CreateHappeningDto `json:"dto"`
+	Happening *models4schedulus.HappeningBase `json:"happening"`
 }
 
 // Validate returns error if not valid
@@ -18,10 +18,10 @@ func (v CreateHappeningRequest) Validate() error {
 	if err := v.TeamRequest.Validate(); err != nil {
 		return fmt.Errorf("team request is not valid: %w", err)
 	}
-	if v.Dto == nil {
-		return validation.NewErrRequestIsMissingRequiredField("dto")
+	if v.Happening == nil {
+		return validation.NewErrRequestIsMissingRequiredField("happening")
 	}
-	if err := v.Dto.Validate(); err != nil {
+	if err := v.Happening.Validate(); err != nil {
 		return validation.NewErrBadRequestFieldValue("dto", err.Error())
 	}
 	return nil
