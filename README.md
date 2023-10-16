@@ -12,6 +12,6 @@ Temporary common home for built-in sneat app modules - to be split into separate
 - [assetus](./assetus) - assets management
 - [listus](./listus) - ToDo/ToWatch/etc. lists management
 - [retrospectus](./retrospectus) - retrospectives management
-- [scheduleus](./schedulus) - schedule management
+- [scheduleus](../sneat-core-modules/schedulus) - schedule management
 - [scrumus](./scrumus) - scrum meeting management
 - 
