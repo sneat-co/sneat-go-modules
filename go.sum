@@ -1,5 +1,7 @@
 github.com/alexsergivan/transliterator v1.0.0 h1:SAA+fkGZKLnak47h8Dr6829IE2kpSZR2Y3yTd69cIwY=
 github.com/alexsergivan/transliterator v1.0.0/go.mod h1:0IrumukulURJ4PD0z6UcdJKP2job1DYDhnHAP5y+5pE=
+github.com/bots-go-framework/bots-fw-store v0.1.2 h1:ROWvP/IuB27urjl/6tHThEGEBmVZ5Kh5FyPDpWslD3k=
+github.com/bots-go-framework/bots-fw-store v0.1.2/go.mod h1:T2yX1QodQ9A1nep/aIAL/czt9adqMyIBVTGOAdNVPAI=
 github.com/crediterra/money v0.2.1 h1:VWe0gMQy/o9iDW84mLQnjM1TqyLRJ14C81VvaTU7jVg=
 github.com/crediterra/money v0.2.1/go.mod h1:0BT7dzPk4Wv+Wi8J6sxlFbCknYioLWVVQM4ciMJh6TI=
 github.com/dal-go/dalgo v0.12.0 h1:giibzqo6mIkU06b0r4uKb3ZEa2agtj1qnL8RNa6sOBM=
@@ -19,6 +21,8 @@ github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZb
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/sneat-co/sneat-core-modules v0.9.1 h1:fpssuhAeik5boOF9jb8suXqK5TfV8e/k4ezY4RnXD90=
 github.com/sneat-co/sneat-core-modules v0.9.1/go.mod h1:NxRCdeKiJ4wbJlS9IuKmmtUUnAAIXqWYD7qL10WHerI=
+github.com/sneat-co/sneat-core-modules v0.9.3 h1:xuHa5Z/YJRhLZKbZIurKyPpsRgjWNyoT9Cq4pQfqH4Y=
+github.com/sneat-co/sneat-core-modules v0.9.3/go.mod h1:ZLxvCYlEjjY9CXwj+QMQZssBEo/WGTHuPAo88cytlsM=
 github.com/sneat-co/sneat-go-core v0.16.1 h1:jJWiccJkicN8lXI3axWCNllLX8Lc0k88eoyQA19zve8=
 github.com/sneat-co/sneat-go-core v0.16.1/go.mod h1:8b9g6HVJdAZN7e01qraR6EwV4XvZ2+wtegc9bdBPRhY=
 github.com/sneat-co/sneat-go-core v0.18.0 h1:f+uZmboCUri2YVghYfhWXslmTlk7AQtymtRf2EOSVsY=
