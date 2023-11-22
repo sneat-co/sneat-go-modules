@@ -6,7 +6,7 @@ go 1.21.4
 
 require (
 	github.com/dal-go/dalgo v0.12.0
-	github.com/sneat-co/sneat-core-modules v0.9.3
+	github.com/sneat-co/sneat-core-modules v0.9.5
 	github.com/sneat-co/sneat-go-core v0.18.0
 	github.com/strongo/random v0.0.1
 	github.com/strongo/slice v0.1.4
