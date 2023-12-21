@@ -198,14 +198,14 @@ func addRetroItemToTeamRetro(ctx context.Context, userContext facade.User, reque
 
 		// adds item to retrospective
 		{
-			if user.Name.Full == "" {
+			if user.Names.FullName == "" {
 				return fmt.Errorf("user[%v].Title is empty: %+v", uid, user)
 			}
 
 			if request.MeetingID != UpcomingRetrospectiveID {
 				item.By = &models4retrospectus.RetroUser{
 					UserID: uid,
-					Title:  user.Name.Full,
+					Title:  user.Names.FullName,
 				}
 			}
 			retrospective.Items = addItemWithUniqueID(&item, retrospective.Items)

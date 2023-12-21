@@ -57,7 +57,7 @@ func AddComment(ctx context.Context, userContext facade.User, request AddComment
 				Message: request.Message,
 				By: &dbmodels.ByUser{
 					UID:   uid,
-					Title: user.Name.Full,
+					Title: user.Names.FullName,
 				},
 			}
 
