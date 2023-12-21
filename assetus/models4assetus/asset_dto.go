@@ -5,6 +5,7 @@ import (
 	"github.com/sneat-co/sneat-go-core/models/dbmodels"
 	"github.com/sneat-co/sneat-go-core/validate"
 	"github.com/sneat-co/sneat-go-modules/assetus/briefs4assetus"
+	"github.com/strongo/strongoapp/with"
 )
 
 const TeamAssetsCollection = "assets"
@@ -27,7 +28,7 @@ type AssetCreationData interface {
 }
 
 type AssetDto struct {
-	dbmodels.WithTags
+	with.TagsField
 }
 
 // AssetDbData defines mandatory fields & methods on an asset record
@@ -41,7 +42,7 @@ type AssetDbData interface {
 type AssetMainDto struct {
 	briefs4assetus.AssetBrief
 	briefs4assetus.WithAssetusTeamBriefs[*briefs4assetus.AssetBrief]
-	dbmodels.WithTags
+	with.TagsField
 	briefs4contactus.WithMultiTeamContactIDs
 	dbmodels.WithCustomFields
 	AssetDates
@@ -58,7 +59,7 @@ func (v *AssetMainDto) Validate() error {
 	if err := v.WithAssetusTeamBriefs.Validate(); err != nil {
 		return err
 	}
-	if err := v.WithTags.Validate(); err != nil {
+	if err := v.TagsField.Validate(); err != nil {
 		return err
 	}
 	if err := v.WithMultiTeamContactIDs.Validate(); err != nil {

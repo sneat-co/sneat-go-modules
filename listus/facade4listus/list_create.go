@@ -12,6 +12,7 @@ import (
 	"github.com/sneat-co/sneat-go-modules/listus/dal4listus"
 	"github.com/sneat-co/sneat-go-modules/listus/models4listus"
 	"github.com/strongo/random"
+	"github.com/strongo/strongoapp/with"
 	"strings"
 	"time"
 )
@@ -55,11 +56,15 @@ func CreateList(ctx context.Context, user facade.User, request CreateListRequest
 			}
 			list := models4listus.ListDto{
 				WithModified: dbmodels.WithModified{
-					WithCreated: dbmodels.WithCreated{
-						CreatedAt: modified.At,
-						CreatedBy: modified.By,
+					CreatedFields: with.CreatedFields{
+						CreatedAtField: with.CreatedAtField{
+							CreatedAt: modified.At,
+						},
+						CreatedByField: with.CreatedByField{
+							CreatedBy: modified.By,
+						},
 					},
-					WithUpdated: dbmodels.WithUpdated{
+					UpdatedFields: with.UpdatedFields{
 						UpdatedAt: modified.At,
 						UpdatedBy: modified.By,
 					},

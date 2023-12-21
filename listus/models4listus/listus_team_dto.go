@@ -1,12 +1,12 @@
 package models4listus
 
 import (
-	"github.com/sneat-co/sneat-go-core/models/dbmodels"
+	"github.com/strongo/strongoapp/with"
 	"github.com/strongo/validation"
 )
 
 type ListusTeamDto struct {
-	dbmodels.WithCreated
+	with.CreatedFields
 	Lists map[string]*ListBrief `json:"lists,omitempty" firestore:"lists,omitempty"`
 	//ListGroups []*ListGroup          `json:"listGroups,omitempty" firestore:"listGroups,omitempty"`
 }
@@ -15,7 +15,7 @@ func (v ListusTeamDto) Validate() error {
 	if err := validateListBriefs(v.Lists); err != nil {
 		return validation.NewErrBadRecordFieldValue("lists", err.Error())
 	}
-	if err := v.WithCreated.Validate(); err != nil {
+	if err := v.CreatedFields.Validate(); err != nil {
 		return err
 	}
 	return nil

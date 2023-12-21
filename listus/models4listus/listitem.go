@@ -1,7 +1,7 @@
 package models4listus
 
 import (
-	"github.com/sneat-co/sneat-go-core/models/dbmodels"
+	"github.com/strongo/strongoapp/with"
 	"github.com/strongo/validation"
 	"strings"
 )
@@ -25,7 +25,7 @@ func (v ListItemBase) Validate() error {
 type ListItemBrief struct {
 	ID string `json:"id" firestore:"id"`
 	ListItemBase
-	dbmodels.WithCreated
+	with.CreatedFields
 }
 
 // Validate returns error if not valid
@@ -36,7 +36,7 @@ func (v ListItemBrief) Validate() error {
 	if err := v.ListItemBase.Validate(); err != nil {
 		return err
 	}
-	if err := v.WithCreated.Validate(); err != nil {
+	if err := v.CreatedFields.Validate(); err != nil {
 		return err
 	}
 	return nil
