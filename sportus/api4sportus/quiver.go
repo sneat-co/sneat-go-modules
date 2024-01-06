@@ -36,7 +36,7 @@ func createWantedItem(w http.ResponseWriter, r *http.Request) {
 	}
 	var id string
 	if id, err = facade4sportus.CreateWanted(ctx, userContext, request); err != nil {
-		httpserver.HandleError(err, "createWantedItem", w, r)
+		httpserver.HandleError(ctx, err, "createWantedItem", w, r)
 		return
 	}
 	w.WriteHeader(http.StatusOK)
@@ -54,7 +54,7 @@ func deleteWantedItem(w http.ResponseWriter, r *http.Request) {
 	}
 	request := facade4sportus.DeleteWantedRequest{ID: r.URL.Query().Get("id")}
 	if err = facade4sportus.DeleteWanted(ctx, userContext, request); err != nil {
-		httpserver.HandleError(err, "deleteWantedItem", w, r)
+		httpserver.HandleError(ctx, err, "deleteWantedItem", w, r)
 	}
 	w.WriteHeader(http.StatusOK)
 }

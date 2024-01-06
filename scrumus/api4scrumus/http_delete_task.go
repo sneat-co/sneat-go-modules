@@ -16,7 +16,7 @@ var deleteTask = facade4scrumus.DeleteTask
 func httpDeleteTask(w http.ResponseWriter, r *http.Request) {
 	ctx, userContext, err := apicore.VerifyRequestAndCreateUserContext(w, r, verify.DefaultJsonWithAuthRequired)
 	if err != nil {
-		httpserver.HandleError(err, "httpDeleteTask", w, r)
+		httpserver.HandleError(ctx, err, "httpDeleteTask", w, r)
 		return
 	}
 	query := r.URL.Query()
@@ -33,7 +33,7 @@ func httpDeleteTask(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err := request.Validate(); err != nil {
-		httpserver.HandleError(err, "httpDeleteTask", w, r)
+		httpserver.HandleError(ctx, err, "httpDeleteTask", w, r)
 		return
 	}
 	err = deleteTask(ctx, userContext, request)
