@@ -1,6 +1,6 @@
 module github.com/sneat-co/sneat-go-modules
 
-go 1.21.5
+go 1.21.6
 
 //replace github.com/sneat-co/sneat-core-modules => ../sneat-core-modules
 
