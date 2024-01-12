@@ -4,9 +4,9 @@ import (
 	"context"
 	"encoding/json"
 	"github.com/dal-go/dalgo/dal"
-	"github.com/sneat-co/sneat-core-modules/teamus/dto4teamus"
 	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-go-modules/meetingus/facade4meetingus"
+	"github.com/sneat-co/sneat-go-modules/teamus/dto4teamus"
 	"strings"
 	"testing"
 )

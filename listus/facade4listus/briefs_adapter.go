@@ -1,8 +1,8 @@
 package facade4listus
 
 import (
-	"github.com/sneat-co/sneat-core-modules/teamus/dal4teamus"
 	"github.com/sneat-co/sneat-go-modules/listus/models4listus"
+	"github.com/sneat-co/sneat-go-modules/teamus/dal4teamus"
 )
 
 var briefsAdapter = func(listType models4listus.ListType, listID string) dal4teamus.BriefsAdapter[*models4listus.ListusTeamDto] {

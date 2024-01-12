@@ -3,9 +3,9 @@ package dal4listus
 import (
 	"github.com/dal-go/dalgo/dal"
 	"github.com/dal-go/dalgo/record"
-	"github.com/sneat-co/sneat-core-modules/teamus/dal4teamus"
 	"github.com/sneat-co/sneat-go-modules/listus/const4listus"
 	"github.com/sneat-co/sneat-go-modules/listus/models4listus"
+	"github.com/sneat-co/sneat-go-modules/teamus/dal4teamus"
 )
 
 type ListContext struct {

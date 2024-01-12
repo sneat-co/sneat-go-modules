@@ -4,11 +4,11 @@ import (
 	"context"
 	"errors"
 	"github.com/dal-go/dalgo/dal"
-	"github.com/sneat-co/sneat-core-modules/teamus/dal4teamus"
 	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-go-modules/assetus/const4assetus"
 	"github.com/sneat-co/sneat-go-modules/assetus/dal4assetus"
 	"github.com/sneat-co/sneat-go-modules/assetus/models4assetus"
+	"github.com/sneat-co/sneat-go-modules/teamus/dal4teamus"
 )
 
 // DeleteAsset deletes an asset

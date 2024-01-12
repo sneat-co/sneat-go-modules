@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"github.com/dal-go/dalgo/dal"
 	"github.com/dal-go/dalgo/record"
-	"github.com/sneat-co/sneat-core-modules/teamus/dal4teamus"
 	core "github.com/sneat-co/sneat-go-core"
 	"github.com/sneat-co/sneat-go-modules/assetus/const4assetus"
 	"github.com/sneat-co/sneat-go-modules/assetus/models4assetus"
+	"github.com/sneat-co/sneat-go-modules/teamus/dal4teamus"
 )
 
 func NewAssetEntryWithData[D any](teamID, contactID string, data D) (asset record.DataWithID[string, D]) {

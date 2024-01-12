@@ -1,7 +1,7 @@
 package models4scrumus
 
 import (
-	"github.com/sneat-co/sneat-core-modules/teamus/models4teamus"
+	"github.com/sneat-co/sneat-go-modules/teamus/models4teamus"
 )
 
 // ScrumTeamDto is a DTO for scrum team

@@ -4,11 +4,11 @@ import (
 	"context"
 	"errors"
 	"github.com/dal-go/dalgo/dal"
-	"github.com/sneat-co/sneat-core-modules/teamus/dal4teamus"
 	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-go-modules/listus/const4listus"
 	"github.com/sneat-co/sneat-go-modules/listus/dal4listus"
 	"github.com/sneat-co/sneat-go-modules/listus/models4listus"
+	"github.com/sneat-co/sneat-go-modules/teamus/dal4teamus"
 	"github.com/strongo/validation"
 )
 

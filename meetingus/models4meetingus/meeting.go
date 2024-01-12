@@ -2,10 +2,10 @@ package models4meetingus
 
 import (
 	"fmt"
-	"github.com/sneat-co/sneat-core-modules/contactus/briefs4contactus"
-	"github.com/sneat-co/sneat-core-modules/contactus/const4contactus"
 	"github.com/sneat-co/sneat-go-core"
 	"github.com/sneat-co/sneat-go-core/models/dbmodels"
+	"github.com/sneat-co/sneat-go-modules/contactus/briefs4contactus"
+	"github.com/sneat-co/sneat-go-modules/contactus/const4contactus"
 	"github.com/strongo/slice"
 	"github.com/strongo/validation"
 	"time"

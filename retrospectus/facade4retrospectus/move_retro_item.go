@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"github.com/dal-go/dalgo/dal"
 	"github.com/sneat-co/sneat-go-core/facade"
-	"github.com/sneat-co/sneat-core-modules/userus/models4userus"
 	"github.com/sneat-co/sneat-go-modules/retrospectus/models4retrospectus"
+	"github.com/sneat-co/sneat-go-modules/userus/models4userus"
 )
 
 // MoveRetroItem moves item

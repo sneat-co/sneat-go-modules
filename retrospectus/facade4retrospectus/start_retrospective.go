@@ -5,17 +5,17 @@ import (
 	"errors"
 	"fmt"
 	"github.com/dal-go/dalgo/dal"
-	"github.com/sneat-co/sneat-core-modules/contactus/const4contactus"
-	"github.com/sneat-co/sneat-core-modules/contactus/dal4contactus"
-	"github.com/sneat-co/sneat-core-modules/teamus/dal4teamus"
-	"github.com/sneat-co/sneat-core-modules/teamus/models4teamus"
-	"github.com/sneat-co/sneat-core-modules/userus/facade4userus"
-	"github.com/sneat-co/sneat-core-modules/userus/models4userus"
 	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-go-core/models/dbmodels"
+	"github.com/sneat-co/sneat-go-modules/contactus/const4contactus"
+	"github.com/sneat-co/sneat-go-modules/contactus/dal4contactus"
 	"github.com/sneat-co/sneat-go-modules/meetingus/models4meetingus"
 	"github.com/sneat-co/sneat-go-modules/retrospectus/dal4retrospectus"
 	"github.com/sneat-co/sneat-go-modules/retrospectus/models4retrospectus"
+	"github.com/sneat-co/sneat-go-modules/teamus/dal4teamus"
+	"github.com/sneat-co/sneat-go-modules/teamus/models4teamus"
+	"github.com/sneat-co/sneat-go-modules/userus/facade4userus"
+	"github.com/sneat-co/sneat-go-modules/userus/models4userus"
 )
 
 // StartRetrospective starts retro

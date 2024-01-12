@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 	"github.com/dal-go/dalgo/dal"
-	"github.com/sneat-co/sneat-core-modules/contactus/dal4contactus"
-	"github.com/sneat-co/sneat-core-modules/teamus/models4teamus"
 	"github.com/sneat-co/sneat-go-core/facade"
+	"github.com/sneat-co/sneat-go-modules/contactus/dal4contactus"
 	"github.com/sneat-co/sneat-go-modules/meetingus/models4meetingus"
+	"github.com/sneat-co/sneat-go-modules/teamus/models4teamus"
 	"github.com/strongo/validation"
 )
 

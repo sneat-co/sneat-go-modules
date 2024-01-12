@@ -1,12 +1,12 @@
 package api4scrumus
 
 import (
-	"github.com/sneat-co/sneat-core-modules/teamus/dto4teamus"
 	"github.com/sneat-co/sneat-go-core/apicore"
 	"github.com/sneat-co/sneat-go-core/apicore/verify"
 	"github.com/sneat-co/sneat-go-core/httpserver"
 	"github.com/sneat-co/sneat-go-modules/meetingus/facade4meetingus"
 	"github.com/sneat-co/sneat-go-modules/scrumus/facade4scrumus"
+	"github.com/sneat-co/sneat-go-modules/teamus/dto4teamus"
 	"net/http"
 )
 

@@ -4,8 +4,8 @@ import (
 	"context"
 	"github.com/dal-go/dalgo/dal"
 	"github.com/dal-go/dalgo/record"
-	"github.com/sneat-co/sneat-core-modules/teamus/dal4teamus"
 	"github.com/sneat-co/sneat-go-modules/retrospectus/models4retrospectus"
+	"github.com/sneat-co/sneat-go-modules/teamus/dal4teamus"
 )
 
 const RetrospectusModuleID = "retrospectus"

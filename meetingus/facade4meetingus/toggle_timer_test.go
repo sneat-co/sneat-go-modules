@@ -2,11 +2,11 @@ package facade4meetingus
 
 import (
 	"context"
-	"github.com/sneat-co/sneat-core-modules/teamus/dto4teamus"
-	"github.com/sneat-co/sneat-core-modules/teamus/models4teamus"
 	"github.com/sneat-co/sneat-go-core/facade"
 	"github.com/sneat-co/sneat-go-core/models/dbmodels"
 	"github.com/sneat-co/sneat-go-modules/meetingus/models4meetingus"
+	"github.com/sneat-co/sneat-go-modules/teamus/dto4teamus"
+	"github.com/sneat-co/sneat-go-modules/teamus/models4teamus"
 	"testing"
 	"time"
 )

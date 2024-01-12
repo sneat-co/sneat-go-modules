@@ -1,10 +1,10 @@
 package models4assetus
 
 import (
-	"github.com/sneat-co/sneat-core-modules/contactus/briefs4contactus"
 	"github.com/sneat-co/sneat-go-core/models/dbmodels"
 	"github.com/sneat-co/sneat-go-core/validate"
 	"github.com/sneat-co/sneat-go-modules/assetus/briefs4assetus"
+	"github.com/sneat-co/sneat-go-modules/contactus/briefs4contactus"
 	"github.com/strongo/strongoapp/with"
 )
 
