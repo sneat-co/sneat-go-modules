@@ -1,4 +1,4 @@
-package sneat_go_modules
+package sneatgomodules
 
 import (
 	"testing"
