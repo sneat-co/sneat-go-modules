@@ -5,8 +5,8 @@ go 1.22.0
 require (
 	github.com/bots-go-framework/bots-fw v0.25.2
 	github.com/bots-go-framework/bots-fw-store v0.4.0
-	github.com/bots-go-framework/bots-fw-telegram v0.8.3
-	github.com/bots-go-framework/bots-fw-telegram-models v0.1.2
+	github.com/bots-go-framework/bots-fw-telegram v0.8.4
+	github.com/bots-go-framework/bots-fw-telegram-models v0.1.3
 	github.com/crediterra/money v0.2.1
 	github.com/dal-go/dalgo v0.12.1
 	github.com/dal-go/mocks4dalgo v0.1.19
@@ -14,7 +14,7 @@ require (
 	github.com/gosimple/slug v1.14.0
 	github.com/julienschmidt/httprouter v1.3.0
 	github.com/olebedev/when v1.0.0
-	github.com/sneat-co/sneat-go-core v0.23.2
+	github.com/sneat-co/sneat-go-core v0.23.3
 	github.com/stretchr/testify v1.9.0
 	github.com/strongo/i18n v0.0.4
 	github.com/strongo/log v0.3.0
