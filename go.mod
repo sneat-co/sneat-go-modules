@@ -1,6 +1,6 @@
 module github.com/sneat-co/sneat-go-modules
 
-go 1.22.0
+go 1.22.1
 
 require (
 	github.com/bots-go-framework/bots-fw v0.25.2
